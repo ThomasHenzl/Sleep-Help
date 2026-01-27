@@ -230,3 +230,36 @@ window.addEventListener('DOMContentLoaded', event => {
     loadPage(defaultPage, true);
   }
 })();
+const switcher = document.getElementById("modeSwitcher");
+
+// Check for saved theme preference or default to light mode
+const currentTheme = localStorage.getItem('theme') || 'light';
+if (currentTheme === 'dark') {
+  document.body.classList.add('dark');
+  switcher.textContent = "🌙"; // Dark Mode
+} else {
+  switcher.textContent = "☀️"; // Light Mode
+}
+
+switcher.addEventListener("click", () => {
+  // Start Animation
+  switcher.style.transform = "scale(0.8) rotate(90deg)";
+  switcher.style.opacity = "0.6";
+
+  setTimeout(() => {
+    document.body.classList.toggle("dark");
+
+    if (document.body.classList.contains("dark")) {
+      switcher.textContent = "🌙"; // Dark Mode
+    } else {
+      switcher.textContent = "☀️"; // Light Mode
+    }
+
+    // Save theme preference
+    localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+
+    // Zurück zur normalen Position
+    switcher.style.transform = "scale(1) rotate(0deg)";
+    switcher.style.opacity = "1";
+  }, 250);
+});

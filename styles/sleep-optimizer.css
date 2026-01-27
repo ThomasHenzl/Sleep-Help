@@ -9,6 +9,31 @@ body {
   color: #24324a;
   line-height: 1.4;
 }
+
+.card {
+  background: #ffffff;
+  color: #24324a;
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.btn {
+  background: #007bff;
+  color: #ffffff;
+  border: 1px solid #007bff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn:hover {
+  background: #0056b3;
+  border-color: #004085;
+}
 .container {
   max-width: 1000px;
   margin: 0 auto;
@@ -299,4 +324,41 @@ a:focus {
   h1 {
     font-size: 1.8rem;
   }
+}
+
+/* Dark mode styles */
+body.dark {
+  background: linear-gradient(180deg, #1a1a2e, #16213e);
+  color: #e0e0e0;
+}
+
+body.dark .site-header {
+  background: #2a2a3c;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark #background,
+body.dark .logo {
+  background: linear-gradient(90deg, #2a2a4c, #3a3a5c);
+  color: #ffffff;
+}
+
+body.dark .hero h1 {
+  color: #ffffff;
+}
+
+body.dark .card {
+  background: #2a2a3c;
+  color: #e0e0e0;
+  border: 1px solid #444444;
+}
+
+body.dark .btn {
+  background: #4a4a6a;
+  color: #ffffff;
+  border-color: #4a4a6a;
+}
+
+body.dark .btn:hover {
+  background: #5a5a7a;
 }
