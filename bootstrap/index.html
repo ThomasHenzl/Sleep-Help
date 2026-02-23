@@ -1,71 +1,246 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Simple Sidebar - Start Bootstrap Template</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-    </head>
-    <body>
-        <div class="d-flex" id="wrapper">
-            <!-- Sidebar-->
-            <div class="border-end bg-white" id="sidebar-wrapper">
-                <div class="sidebar-heading border-bottom bg-light">Start Bootstrap</div>
-                <div class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Dashboard</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Shortcuts</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Overview</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Events</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
-                </div>
-            </div>
-            <!-- Page content wrapper-->
-            <div id="page-content-wrapper">
-                <!-- Top navigation-->
-                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                    <div class="container-fluid">
-                        <button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                                <li class="nav-item active"><a class="nav-link" href="#!">Home</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#!">Link</a></li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="#!">Action</a>
-                                        <a class="dropdown-item" href="#!">Another action</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#!">Something else here</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-                <!-- Page content-->
-                <div class="container-fluid">
-                    <h1 class="mt-4">Simple Sidebar</h1>
-                    <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will change.</p>
-                    <p>
-                        Make sure to keep all page content within the
-                        <code>#page-content-wrapper</code>
-                        . The top navbar is optional, and just for demonstration. Just create an element with the
-                        <code>#sidebarToggle</code>
-                        ID which will toggle the menu when clicked.
-                    </p>
-                </div>
-            </div>
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sleep-Help – Überblick</title>
+
+    <!-- Bootstrap CSS (CDN) -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Projekt-CSS -->
+    <link href="css/index.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="d-flex" id="wrapper">
+      <!-- Sidebar-->
+      <div class="border-end bg-white" id="sidebar-wrapper">
+        <div class="sidebar-heading border-bottom bg-light">Sleep-Help</div>
+        <div class="list-group list-group-flush" id="sidebar-items">
+          <a
+            class="list-group-item list-group-item-action p-3"
+            href="#"
+            data-target="tab1"
+            >Warum guter Schlaf …</a
+          >
+          <a
+            class="list-group-item list-group-item-action p-3"
+            href="#"
+            data-target="tab2"
+            >Matratze kaufen in Linz</a
+          >
+          <a
+            class="list-group-item list-group-item-action p-3"
+            href="#"
+            data-target="tab3"
+            >Die richtige Matratze</a
+          >
+          <a
+            class="list-group-item list-group-item-action p-3"
+            href="#"
+            data-target="tab4"
+            >Einschlafprobleme</a
+          >
+          <a
+            class="list-group-item list-group-item-action p-3"
+            href="#"
+            data-target="tab5"
+            >Praktische Tipps</a
+          >
+          <a
+            class="list-group-item list-group-item-action p-3"
+            href="#"
+            data-target="tab6"
+            >Licht, Luft und Atmung</a
+          >
+          <a
+            class="list-group-item list-group-item-action p-3"
+            href="#"
+            data-target="tab7"
+            >Ganzheitlicher Ansatz</a
+          >
         </div>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
+      </div>
+
+      <!-- Page content wrapper-->
+      <div id="page-content-wrapper">
+        <!-- Top navigation-->
+        <nav
+          class="navbar navbar-expand-lg navbar-light bg-light border-bottom"
+        >
+          <div class="container-fluid">
+            <button class="btn btn-outline-primary" id="sidebarToggle">
+              Menu
+            </button>
+          </div>
+        </nav>
+
+        <!-- Content -->
+        <div class="container-fluid p-4">
+          <div id="tab-content" class="tab-content">
+            <!-- Tab 1 -->
+            <div id="tab1" class="tab-pane active">
+              <h2 class="mb-3">
+                Warum guter Schlaf die Grundlage für Gesundheit und
+                Leistungsfähigkeit ist
+              </h2>
+              <p>Gesunder Schlaf ist eine zentrale Voraussetzung für körperliches Wohlbefinden, geistige Leistungsfähigkeit und emotionale Stabilität.</p>
+              <p>Während wir schlafen, laufen im Körper komplexe Regenerationsprozesse ab:</p>
+              <p>Zellen erneuern sich, das Immunsystem wird aktiviert, Hormone werden reguliert und das Gehirn verarbeitet Informationen sowie Erlebnisse des Tages.</p>
+              <p>Schlaf ist daher kein passiver Zustand, sondern eine hochaktive Phase biologischer Erholung.</p>
+
+              <p>Wissenschaftliche Erkenntnisse zeigen, dass chronischer Schlafmangel das Risiko für Herz-Kreislauf-Erkrankungen, Stoffwechselstörungen, Konzentrationsprobleme und psychische Belastungen erhöhen kann.</p>
+              <p>Auch das Schmerzempfinden nimmt bei schlechtem Schlaf zu.</p>
+              <p>Viele Menschen unterschätzen zudem, wie stark die Schlafqualität ihre Leistungsfähigkeit im Alltag beeinflusst.</p>
+              <p>Bereits wenige Nächte mit unzureichendem Schlaf können Reaktionszeit, Aufmerksamkeit und Entscheidungsfähigkeit spürbar verschlechtern.</p>
+
+              <p>Neben Stress und psychischen Faktoren spielt die Schlafumgebung eine entscheidende Rolle.</p>
+              <p>Temperatur, Lichtverhältnisse, Geräuschkulisse und Luftqualität beeinflussen den natürlichen Schlaf-Wach-Rhythmus erheblich.</p>
+              <p>Besonders wichtig ist jedoch die Qualität des Bettes und der Matratze, da der Körper mehrere Stunden in einer statischen Position verbringt.</p>
+              <p>Eine ergonomisch ungeeignete Unterlage kann die nächtliche Regeneration massiv beeinträchtigen und langfristig zu Beschwerden führen.</p>
+            </div>
+
+            <!-- Tab 2 -->
+            <div id="tab2" class="tab-pane" hidden>
+              <h2 class="mb-3">
+                Matratze kaufen in Linz – Individuelle Schlafsysteme bei
+                schlafTEQ
+              </h2>
+              <p>Wer in Linz eine neue Matratze kaufen möchte, sollte sich bewusst machen, dass es keine universelle Lösung für alle Menschen gibt.</p>
+              <p>Körperbau, Gewicht, Schlafposition und individuelle Beschwerden unterscheiden sich stark.</p>
+              <p>Genau hier setzt das Konzept von schlafTEQ Ärztehaus Linz an.</p>
+              <p>Das Unternehmen bietet keine Standardmatratzen „von der Stange“, sondern individuell angepasste Schlafsysteme.</p>
+
+              <p>Im Mittelpunkt steht eine kostenlose und unverbindliche Schlafberatung.</p>
+              <p>Dabei wird die persönliche Schlafsituation genau analysiert.</p>
+              <p>Faktoren wie Körpergröße, Gewicht, Proportionen, bevorzugte Schlaflage sowie bestehende Rücken-, Nacken- oder Schulterbeschwerden werden berücksichtigt.</p>
+              <p>Ziel ist es, eine Matratze zu finden, die die Wirbelsäule in ihrer natürlichen Form unterstützt und Druckpunkte gezielt entlastet.</p>
+
+              <p>Ein besonderes Merkmal ist der patentierte Liege-Simulator.</p>
+              <p>Mit diesem System wird gemessen, wie sich der Körper auf unterschiedlichen Einstellungen verhält.</p>
+              <p>Die Position der Wirbelsäule wird analysiert, um Fehlhaltungen im Liegen zu erkennen.</p>
+              <p>So lässt sich feststellen, ob Schultern und Becken ausreichend einsinken oder ob bestimmte Bereiche stärker gestützt werden müssen.</p>
+              <p>Diese präzise Analyse ermöglicht eine maßgeschneiderte Anpassung.</p>
+
+              <p>Die Matratzen sind in verschiedenen Ausführungen erhältlich und bieten je nach Modell bis zu 24 individuell einstellbare Zonen.</p>
+              <p>Dadurch können einzelne Körperbereiche gezielt unterstützt werden.</p>
+              <p>Kundinnen und Kunden testen ihre persönliche Konfiguration direkt vor Ort und können Feinjustierungen vornehmen, bevor die Matratze gefertigt wird.</p>
+              <p>Dieser Prozess stellt sicher, dass die Schlafunterlage exakt zu den individuellen Bedürfnissen passt.</p>
+            </div>
+
+            <!-- Tab 3 -->
+            <div id="tab3" class="tab-pane" hidden>
+              <h2 class="mb-3">
+                Die richtige Matratze als entscheidender Faktor für
+                Rückengesundheit
+              </h2>
+              <p>Die Wirbelsäule besitzt eine natürliche Doppel-S-Form, die auch im Liegen möglichst erhalten bleiben sollte.</p>
+              <p>Eine zu harte Matratze verhindert das Einsinken von Schultern und Becken, während eine zu weiche Unterlage den Körper durchhängen lässt.</p>
+              <p>Beide Extreme können zu Fehlbelastungen führen.</p>
+
+              <p>Eine ergonomisch angepasste Matratze sorgt dafür, dass:</p>
+              <ul>
+                <li>Die Wirbelsäule in Seiten- und Rückenlage gerade ausgerichtet bleibt</li>
+                <li>Druckpunkte an Schultern, Hüfte und Fersen reduziert werden</li>
+                <li>Die Muskulatur nachts entspannen kann</li>
+                <li>Die Durchblutung nicht eingeschränkt wird</li>
+              </ul>
+
+              <p>Besonders Seitenschläfer profitieren von einer differenzierten Zoneneinteilung, da Schultern und Becken tiefer einsinken müssen als der Lendenbereich.</p>
+              <p>Rückenschläfer benötigen eine stabile Unterstützung im unteren Rücken.</p>
+              <p>Individuell einstellbare Zonen bieten hier deutliche Vorteile gegenüber Standardlösungen.</p>
+
+              <p>Langfristig kann eine passende Matratze dazu beitragen, morgendliche Verspannungen zu reduzieren und die Schlafqualität spürbar zu verbessern.</p>
+              <p>Gerade bei bestehenden Rückenproblemen ist eine professionelle Beratung empfehlenswert.</p>
+            </div>
+
+            <!-- Tab 4 -->
+            <div id="tab4" class="tab-pane" hidden>
+              <h2 class="mb-3">
+                Einschlafprobleme verstehen und gezielt lösen
+              </h2>
+              <p>Viele Menschen kämpfen nicht nur mit körperlichen Beschwerden, sondern auch mit Einschlafproblemen.</p>
+              <p>Grübeln, Stress oder ein unregelmäßiger Tagesrhythmus können den natürlichen Schlaf-Wach-Zyklus stören.</p>
+              <p>Der Körper produziert das Schlafhormon Melatonin vor allem bei Dunkelheit.</p>
+              <p>Helles Licht und Bildschirmnutzung am Abend können diese Produktion hemmen.</p>
+
+              <p>Ein häufiger Fehler besteht darin, im Bett wach zu liegen und sich unter Druck zu setzen, einschlafen zu müssen.</p>
+              <p>Dies verstärkt innere Anspannung.</p>
+              <p>Stattdessen kann es hilfreich sein, kurz aufzustehen, etwas Ruhiges zu tun und erst bei erneuter Müdigkeit ins Bett zurückzukehren.</p>
+
+              <p>Auch der Umgang mit Gedanken spielt eine Rolle.</p>
+              <p>Wer abends grübelt, kann versuchen, belastende Themen schriftlich festzuhalten, um sie gedanklich auszulagern.</p>
+              <p>Eine feste Abendroutine signalisiert dem Körper, dass die Schlafphase bevorsteht.</p>
+            </div>
+
+            <!-- Tab 5 -->
+            <div id="tab5" class="tab-pane" hidden>
+              <h2 class="mb-3">Praktische Tipps für bessere Schlafhygiene</h2>
+              <p>Schlafhygiene umfasst alle Gewohnheiten, die einen gesunden Schlaf fördern.</p>
+              <p>Dazu gehören:</p>
+              <ul>
+                <li>Regelmäßige Schlafzeiten: Ein konstanter Rhythmus stabilisiert die innere Uhr.</li>
+                <li>Wer täglich zur ähnlichen Zeit schlafen geht und aufsteht, unterstützt seinen biologischen Takt.</li>
+                <li>Optimale Raumtemperatur: Ein eher kühles Schlafzimmer wird häufig als angenehm empfunden.</li>
+                <li>Frische Luft kann zusätzlich die Schlafqualität verbessern.</li>
+                <li>Reduzierung von Bildschirmzeit: Mindestens eine Stunde vor dem Schlafengehen sollten Smartphone, Tablet und Fernseher vermieden werden, da blaues Licht die Melatonin-Ausschüttung hemmt.</li>
+                <li>Leichte Abendmahlzeiten: Schwere, fettige Speisen können die Verdauung belasten und das Einschlafen erschweren.</li>
+                <li>Auch koffeinhaltige Getränke sollten am Abend reduziert werden.</li>
+                <li>Bewegung im Alltag: Regelmäßige körperliche Aktivität unterstützt einen gesunden Schlaf.</li>
+                <li>Intensive Sporteinheiten sollten jedoch nicht unmittelbar vor dem Zubettgehen stattfinden.</li>
+                <li>Entspannungstechniken: Atemübungen, Meditation oder progressive Muskelentspannung können helfen, körperliche Anspannung abzubauen.</li>
+              </ul>
+              <p>Diese Maßnahmen entfalten ihre Wirkung besonders dann, wenn sie konsequent umgesetzt werden.</p>
+            </div>
+
+            <!-- Tab 6 -->
+            <div id="tab6" class="tab-pane" hidden>
+              <h2 class="mb-3">
+                Die Rolle von Licht, Luft und Atmung für erholsamen Schlaf
+              </h2>
+              <p>Tageslicht ist ein wichtiger Taktgeber für unseren Schlaf-Wach-Rhythmus.</p>
+              <p>Wer sich tagsüber ausreichend im Freien aufhält, stabilisiert seine innere Uhr.</p>
+              <p>Morgendliches Licht signalisiert dem Körper Aktivität, während abendliche Dunkelheit die Melatonin-Produktion fördert.</p>
+
+              <p>Auch die Luftqualität im Schlafzimmer ist entscheidend.</p>
+              <p>Regelmäßiges Lüften sorgt für ausreichenden Sauerstoffgehalt.</p>
+              <p>Menschen mit Atemwegserkrankungen oder Allergien profitieren besonders von einer sauberen, staubarmen Schlafumgebung.</p>
+
+              <p>Bewusste Atemtechniken können beim Einschlafen unterstützen.</p>
+              <p>Langsames, tiefes Atmen aktiviert das parasympathische Nervensystem, das für Entspannung zuständig ist.</p>
+              <p>Eine einfache Methode besteht darin, bewusst länger auszuatmen als einzuatmen.</p>
+              <p>Dadurch wird die Herzfrequenz gesenkt und innere Ruhe gefördert.</p>
+            </div>
+
+            <!-- Tab 7 -->
+            <div id="tab7" class="tab-pane" hidden>
+              <h2 class="mb-3">
+                Ganzheitlicher Ansatz: Schlafumgebung, Verhalten und Matratze im
+                Zusammenspiel
+              </h2>
+              <p>Ein erholsamer Schlaf entsteht durch das Zusammenspiel mehrerer Faktoren.</p>
+              <p>Eine hochwertige, individuell angepasste Matratze – wie sie beim Matratzenkauf in Linz bei schlafTEQ Ärztehaus Linz angeboten wird – bildet die ergonomische Grundlage.</p>
+              <p>Gleichzeitig sind gesunde Gewohnheiten und eine passende Schlafumgebung entscheidend.</p>
+
+              <p>Wer seine Schlafqualität verbessern möchte, sollte daher ganzheitlich vorgehen:</p>
+              <ul>
+                <li>Analyse der aktuellen Matratze und gegebenenfalls professionelle Beratung</li>
+                <li>Optimierung von Schlafhygiene und Abendroutine</li>
+                <li>Reduzierung von Stress und Bildschirmzeit</li>
+                <li>Sicherstellung einer angenehmen Raumtemperatur und Luftqualität</li>
+              </ul>
+              <p>Die Kombination aus individueller Schlaflösung und bewusstem Verhalten kann langfristig zu mehr Energie, besserer Regeneration und gesteigerter Lebensqualität führen.</p>
+              <p>Schlaf ist kein Luxus, sondern eine Investition in die eigene Gesundheit.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Bootstrap JS (CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Projektscript -->
+    <script src="js/scripts.js"></script>
+  </body>
 </html>
