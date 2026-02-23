@@ -9,10 +9,10 @@
   --bg-2: #eef6fb;
   --glass: rgba(255,255,255,0.78);
   --muted: #5b6b78;           /* dezentes, gut lesbares Grau */
-  --text: #5fcff5;            /* dunkle, warme Textfarbe für optimalen Kontrast */
-  --accent: #3f6fe6;
-  --accent-600: #2f57b8;
-  --accent-100: rgba(63,111,230,0.08);
+  --text: #5a8896;            /* gedämpfte, sanfte Textfarbe */
+  --accent: #5b7bc4;
+  --accent-600: #485ba0;
+  --accent-100: rgba(91,123,196,0.08);
   --card-shadow: 0 14px 40px rgba(12,30,60,0.06);
   --soft-shadow: 0 6px 22px rgba(12,30,60,0.04);
   --radius: 14px;
@@ -38,7 +38,7 @@ body{
   font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
-  background: radial-gradient(1200px 600px at 10% 10%, rgba(63,111,230,0.03), transparent),
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(91,123,196,0.03), transparent),
               linear-gradient(180deg,var(--bg-1), var(--bg-2));
   color: var(--text);
   font-size: 17px;                         /* leicht größere Basisgröße */
@@ -515,7 +515,7 @@ blockquote{
 }
 #sidebar-items .list-group-item:focus{
   outline: none;
-  box-shadow: 0 0 0 4px rgba(80,120,224,0.08);
+  box-shadow: 0 0 0 4px rgba(91,123,196,0.08);
 }
 
 /* Responsive rules */
