@@ -1,0 +1,84 @@
+/* ...existing code... */
+
+/* Seitenbreite als Variable verwenden */
+:root {
+  --sidebar-width: 260px;
+}
+
+/* Content-Shift: verschiebe rechten Bereich, wenn Sidebar verschwindet */
+#page-content-wrapper {
+  transform: translateX(0);
+  transition: transform .36s cubic-bezier(.2,.9,.2,1);
+}
+
+/* Wenn wrapper.toggled gesetzt ist (Menu geklickt), verschiebe Content nach links */
+#wrapper.toggled #page-content-wrapper {
+  transform: translateX(calc(-1 * var(--sidebar-width)));
+}
+
+/* Auf mobilen Geräten soll der Content nicht zusätzlich verschoben werden,
+   da die Sidebar dort überlagert wird */
+@media (max-width: 767.98px) {
+  #wrapper.toggled #page-content-wrapper {
+    transform: translateX(0);
+  }
+}
+
+/* Sidebar: Slide-left hide behavior */
+#wrapper {
+  display: flex; /* Wrapper als flex-container (Sidebar + Content) */
+  overflow: hidden;
+}
+
+/* Sidebar-Grundstil */
+#sidebar-wrapper {
+  width: 260px;
+  flex: 0 0 260px;
+  transition: transform .36s cubic-bezier(.2,.9,.2,1), width .36s ease, opacity .28s ease;
+  transform: translateX(0);
+  opacity: 1;
+  overflow: hidden;
+  background: #fff;
+  z-index: 1020;
+}
+
+/* Content nimmt verbleibenden Platz ein */
+#page-content-wrapper {
+  flex: 1 1 auto;
+  transition: margin .36s ease;
+}
+
+/* Zustand: ausgeblendete Sidebar -> nach links schieben und Platz freigeben */
+#wrapper.toggled #sidebar-wrapper {
+  transform: translateX(-260px); /* rutscht nach links */
+  width: 0;                      /* gibt Platz für Content frei */
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Optional: sanfter Schatten, wenn sichtbar */
+#sidebar-wrapper:not([style*="width: 0"]) {
+  box-shadow: 0 2px 12px rgba(8,20,40,0.05);
+}
+
+/* Mobile: gleiche Logik, aber Sidebar über Content legen (falls gewünscht) */
+@media (max-width: 767.98px) {
+  #sidebar-wrapper {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+  }
+  #wrapper.toggled #sidebar-wrapper {
+    transform: translateX(-100%);
+    width: 0;
+  }
+}
+
+/* Optional: Übergangsfeinheiten für Buttons / Links */
+#sidebarToggle {
+  transition: background-color .18s ease, color .18s ease;
+}
+
+/* ...existing code... */
