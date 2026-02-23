@@ -1,500 +1,408 @@
-/* Ruhiges, modernes Theme für Sleep-Help */
+/* Ruhiges, modernes Premium Theme für Sleep-Help */
 
-/* Google Font import -> setzt bessere Schrift für harmonische Typografie */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+/* Google Font import -> saubere, moderne Typografie */
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap");
 
-:root{
-  --sidebar-width: 340px;     /* breitere Sidebar */
-  --bg-1: #f6fbff;
-  --bg-2: #eef6fb;
-  --glass: rgba(255,255,255,0.78);
-  --muted: #5b6b78;           /* dezentes, gut lesbares Grau */
-  --text: #5a8896;            /* gedämpfte, sanfte Textfarbe */
-  --accent: #5b7bc4;
-  --accent-600: #485ba0;
-  --accent-100: rgba(91,123,196,0.08);
-  --card-shadow: 0 14px 40px rgba(12,30,60,0.06);
-  --soft-shadow: 0 6px 22px rgba(12,30,60,0.04);
-  --radius: 14px;
-  --max-read-width: 1100px;   /* deutlich breitere Lesespalte */
-  --tab-padding: 40px;
-  --para-box-padding: 18px;
-  --para-box-radius: 12px;
-  --para-box-gap: 18px;
-  --trans-fast: 180ms;
-  --trans-med: 360ms;
+:root {
+  --sidebar-width: 320px;
+  /* Moderne, helle Farbpalette */
+  --bg-main: #f8fafc; /* Slate 50 für Hintergrund */
+  --bg-card: rgba(255, 255, 255, 0.85); /* Glassmorphism Base */
+
+  --text-primary: #334155; /* Slate 700 */
+  --text-muted: #64748b; /* Slate 500 */
+
+  /* Harmonische Akzentfarben (Sanftes Blau) */
+  --accent: #3b82f6; /* Blue 500 */
+  --accent-hover: #2563eb; /* Blue 600 */
+  --accent-light: rgba(
+    59,
+    130,
+    246,
+    0.08
+  ); /* Sehr feiner Hintergrund für Hover */
+
+  /* Premium Schatten */
+  --card-shadow:
+    0 20px 40px -10px rgba(15, 23, 42, 0.08),
+    0 10px 15px -3px rgba(15, 23, 42, 0.04);
+  --soft-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+
+  --radius-lg: 20px;
+  --radius-md: 12px;
+  --max-read-width: 1000px; /* Optimale Lesebreite */
+
+  --trans-fast: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --trans-med: 400ms cubic-bezier(0.4, 0, 0.2, 1);
 
   /* Lesestil */
-  --reading-line-height: 1.95;
-  --reading-letter-spacing: 0.12px;
-  --reading-word-spacing: 0.18px;
+  --reading-line-height: 1.8;
+  --reading-letter-spacing: 0.2px;
 }
 
 /* Base */
-* { box-sizing: border-box; }
-html, body { height: 100%; }
-body{
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+}
+
+body {
   margin: 0;
-  font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  background: radial-gradient(1200px 600px at 10% 10%, rgba(91,123,196,0.03), transparent),
-              linear-gradient(180deg,var(--bg-1), var(--bg-2));
-  color: var(--text);
-  font-size: 17px;                         /* leicht größere Basisgröße */
-  line-height: var(--reading-line-height); /* luftiger Zeilenabstand */
+  font-family:
+    "Outfit",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-main);
+  /* Dezent dynamischer Hintergrund */
+  background-image:
+    radial-gradient(
+      circle at 15% 50%,
+      rgba(59, 130, 246, 0.04),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 85% 30%,
+      rgba(99, 102, 241, 0.04),
+      transparent 25%
+    );
+  color: var(--text-primary);
+  font-size: 17px;
+  line-height: var(--reading-line-height);
   letter-spacing: var(--reading-letter-spacing);
-  -webkit-font-variant-ligatures: none;
+}
+
+/* Typografie: Modern, Clean */
+h2 {
+  color: #0f172a; /* Slate 900 */
+  font-size: 2rem;
+  margin: 0 0 1.25rem 0;
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+p {
+  color: var(--text-primary);
+  margin: 0 0 1.25rem 0;
+  font-size: 1.125rem;
+  line-height: 1.8;
+}
+
+/* Hervorhebung / Intro */
+.lead {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  font-weight: 400;
+  margin-bottom: 2rem;
+}
+
+/* Links */
+a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  transition: color var(--trans-fast);
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+a::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--accent-hover);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+a:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Listen */
+ul {
+  margin: 0 0 1.5rem 1.5rem;
+  padding: 0;
+}
+
+ul li {
+  margin-bottom: 0.75rem;
+  position: relative;
+  list-style-type: none; /* Custom Bullets */
+}
+
+ul li::before {
+  content: "→";
+  color: var(--accent);
+  position: absolute;
+  left: -1.5rem;
+  font-weight: 600;
 }
 
 /* Wrapper Layout */
-#wrapper{
-  display:flex;
-  min-height:100vh;
-  overflow:hidden;
+#wrapper {
+  display: flex;
+  min-height: 100vh;
+  overflow: hidden;
 }
 
-/* Content-Shift: verschiebe rechten Bereich, wenn Sidebar verschwindet */
+/* Content-Shift Animation */
 #page-content-wrapper {
+  flex: 1 1 auto;
+  transition: transform var(--trans-med);
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
   transform: translateX(0);
-  transition: transform .36s cubic-bezier(.2,.9,.2,1);
 }
 
-/* Wenn wrapper.toggled gesetzt ist (Menu geklickt), verschiebe Content nach links */
 #wrapper.toggled #page-content-wrapper {
   transform: translateX(calc(-1 * var(--sidebar-width)));
 }
 
-/* Auf mobilen Geräten soll der Content nicht zusätzlich verschoben werden,
-   da die Sidebar dort überlagert wird */
 @media (max-width: 767.98px) {
   #wrapper.toggled #page-content-wrapper {
     transform: translateX(0);
   }
 }
 
-/* Sidebar: Slide-left hide behavior */
-#wrapper {
-  display: flex; /* Wrapper als flex-container (Sidebar + Content) */
-  overflow: hidden;
-}
-
 /* Sidebar-Grundstil */
 #sidebar-wrapper {
   width: var(--sidebar-width);
   flex: 0 0 var(--sidebar-width);
-  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(245,250,255,0.96));
-  border-right: 1px solid rgba(15,30,60,0.04);
-  padding: 14px 12px;
-  transition: transform var(--trans-med) cubic-bezier(.2,.9,.2,1), width var(--trans-med) ease, opacity var(--trans-fast) ease;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-right: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 1.5rem 1rem;
+  transition:
+    transform var(--trans-med),
+    opacity var(--trans-fast);
   transform: translateX(0);
-  opacity:1;
   z-index: 1200;
-  backdrop-filter: blur(4px) saturate(120%);
+  box-shadow: 1px 0 15px rgba(0, 0, 0, 0.02);
 }
 
-/* Sidebar header */
-.sidebar-heading{
-  padding: 12px 14px;
-  font-weight:700;
-  color: var(--accent-600);
-  letter-spacing: 0.6px;
-  font-size: 1.05rem;
-}
-
-/* Sidebar list */
-#sidebar-items{
-  margin-top:6px;
-  padding: 8px;
-}
-#sidebar-items .list-group-item{
-  background: transparent;
-  border: none;
-  color: var(--muted);
-  padding: 14px 16px;
-  margin: 10px 8px;
-  border-radius: 10px;
-  transition: transform var(--trans-fast) ease, background-color var(--trans-fast) ease, color var(--trans-fast) ease, box-shadow var(--trans-fast) ease;
-  cursor: pointer;
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-#sidebar-items .list-group-item::before{
-  content: '';
-  width:8px; height:8px;
-  border-radius:50%;
-  background: transparent;
-  transition: background-color var(--trans-fast) ease, transform var(--trans-fast) ease;
-}
-#sidebar-items .list-group-item:hover{
-  background: var(--accent-100);
-  color: var(--accent-600);
-  transform: translateX(6px);
-}
-#sidebar-items .list-group-item.active{
-  background: linear-gradient(90deg, rgba(80,120,224,0.12), rgba(80,120,224,0.06));
-  color: var(--accent-600);
-  font-weight:600;
-  box-shadow: inset 0 -1px 0 rgba(255,255,255,0.5);
-}
-#sidebar-items .list-group-item.active::before{
-  background: var(--accent);
-  transform: scale(1.08);
-}
-
-/* Toggle (falls in HTML vorhanden) */
-#sidebarToggle{
-  display:inline-block;
-  border-radius: 10px;
-  border: 1px solid rgba(47,87,184,0.08);
-  background: linear-gradient(180deg,#fff,#f0f6ff);
-  color: var(--accent-600);
-  padding:8px 12px;
-  font-weight:600;
-  box-shadow: var(--soft-shadow);
-  cursor:pointer;
-  transition: transform var(--trans-fast) ease;
-}
-#sidebarToggle:active{ transform: translateY(1px); }
-
-/* Page content */
-#page-content-wrapper{
-  flex:1 1 auto;
-  transition: transform var(--trans-med) cubic-bezier(.2,.9,.2,1), margin var(--trans-med) ease;
-  padding: 28px;
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
-}
-
-/* Reading column: angenehme Breite */
-.container-fluid{
-  width:100%;
-  max-width: var(--max-read-width);
-  padding-left: 12px;
-  padding-right: 12px;
-}
-
-/* Karten / Lesefläche */
-.tab-pane{
-  width:100%;
-  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,252,255,0.98));
-  border-radius: 16px;
-  padding: var(--tab-padding);
-  box-shadow: var(--card-shadow);
-  margin-bottom: 22px;
-  min-height: 640px;
-  transition: transform var(--trans-fast) ease, opacity var(--trans-fast) ease;
-  position: relative;
-  overflow: hidden;
-  color: var(--text);
-  hyphens: auto;
-}
-
-/* Decorative accent bar - etwas dezenter für besseren Kontrast zur Karte */
-.tab-pane::after{
-  content:'';
-  position:absolute;
-  left:0;
-  top:0;
-  bottom:0;
-  width:6px;
-  background: linear-gradient(180deg, rgba(80,120,224,0.9), rgba(47,87,184,0.8));
-  border-top-left-radius: var(--radius);
-  border-bottom-left-radius: var(--radius);
-  opacity:0.98;
-}
-
-/* Typografie: harmonisch, linksbündig, spacious */
-h2{
-  color: var(--accent-600);
-  font-size: 1.5rem;
-  margin: 0 0 0.85rem 0;
-  line-height: 1.22;
-  font-weight: 600;
-  letter-spacing: 0.2px;
-  text-align: left;
-}
-p{
-  color: var(--text);
-  margin: 0 0 var(--para-box-gap) 0;   /* größerer Abstand zwischen Absätzen */
-  font-size: 1.04rem;
-  line-height: 1.9;          /* gut lesbar in Boxen */
-  word-spacing: var(--reading-word-spacing);
-  text-align: left;        /* kein Blocksatz -> besserer Lesefluss */
-  hyphens: auto;
-}
-
-/* Hervorhebung / Intro */
-.lead {
-  font-size: 1.08rem;
-  color: #15323a;
-  margin-bottom: 1.25rem;
-  font-weight: 400;
-  opacity: 0.95;
-}
-
-/* Listen: mehr Luft und klare Bullet-Position */
-ul{
-  margin: 0 0 1.6rem 1.25rem;
-  color: var(--text);
-  line-height: 1.85;
-}
-ul li{
-  margin-bottom: .75rem;
-  color: var(--text);
-}
-
-/* Links und kleine Elemente */
-a{ color: var(--accent); text-decoration: none; font-weight: 600; }
-a:hover{ text-decoration: underline; color: var(--accent-600); }
-
-/* Blockquote für Zitate / Hinweise */
-blockquote{
-  margin: 0 0 1.6rem 0;
-  padding: 14px 18px;
-  border-left: 4px solid rgba(63,111,230,0.18);
-  background: linear-gradient(180deg, rgba(63,111,230,0.03), transparent);
-  color: #16323a;
-  border-radius: 8px;
-  font-style: italic;
-}
-
-/* Kleine Details: first-paragraph slightly larger */
-.tab-pane p:first-of-type {
-  margin-top: 0;
-}
-
-/* Wrapper Layout */
-#wrapper{
-  display:flex;
-  min-height:100vh;
-  overflow:hidden;
-}
-
-/* Content-Shift: verschiebe rechten Bereich, wenn Sidebar verschwindet */
-#page-content-wrapper {
-  transform: translateX(0);
-  transition: transform .36s cubic-bezier(.2,.9,.2,1);
-}
-
-/* Wenn wrapper.toggled gesetzt ist (Menu geklickt), verschiebe Content nach links */
-#wrapper.toggled #page-content-wrapper {
+#wrapper.toggled #sidebar-wrapper {
   transform: translateX(calc(-1 * var(--sidebar-width)));
-}
-
-/* Auf mobilen Geräten soll der Content nicht zusätzlich verschoben werden,
-   da die Sidebar dort überlagert wird */
-@media (max-width: 767.98px) {
-  #wrapper.toggled #page-content-wrapper {
-    transform: translateX(0);
-  }
-}
-
-/* Sidebar: Slide-left hide behavior */
-#wrapper {
-  display: flex; /* Wrapper als flex-container (Sidebar + Content) */
-  overflow: hidden;
-}
-
-/* Sidebar-Grundstil */
-#sidebar-wrapper {
-  width: var(--sidebar-width);
-  flex: 0 0 var(--sidebar-width);
-  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(245,250,255,0.96));
-  border-right: 1px solid rgba(15,30,60,0.04);
-  padding: 14px 12px;
-  transition: transform var(--trans-med) cubic-bezier(.2,.9,.2,1), width var(--trans-med) ease, opacity var(--trans-fast) ease;
-  transform: translateX(0);
-  opacity:1;
-  z-index: 1200;
-  backdrop-filter: blur(4px) saturate(120%);
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* Sidebar header */
-.sidebar-heading{
-  padding: 12px 14px;
-  font-weight:700;
-  color: var(--accent-600);
-  letter-spacing: 0.6px;
-  font-size: 1.05rem;
+.sidebar-heading {
+  padding: 0.5rem 1rem 1.5rem 1rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.5px;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+  background: transparent !important;
+  margin-bottom: 1rem;
 }
 
 /* Sidebar list */
-#sidebar-items{
-  margin-top:6px;
-  padding: 8px;
+#sidebar-items {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
-#sidebar-items .list-group-item{
+
+#sidebar-items .list-group-item {
   background: transparent;
   border: none;
-  color: var(--muted);
-  padding: 14px 16px;
-  margin: 10px 8px;
-  border-radius: 10px;
-  transition: transform var(--trans-fast) ease, background-color var(--trans-fast) ease, color var(--trans-fast) ease, box-shadow var(--trans-fast) ease;
+  color: var(--text-muted);
+  padding: 0.875rem 1.25rem;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  transition: all var(--trans-fast);
   cursor: pointer;
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-#sidebar-items .list-group-item::before{
-  content: '';
-  width:8px; height:8px;
-  border-radius:50%;
-  background: transparent;
-  transition: background-color var(--trans-fast) ease, transform var(--trans-fast) ease;
-}
-#sidebar-items .list-group-item:hover{
-  background: var(--accent-100);
-  color: var(--accent-600);
-  transform: translateX(6px);
-}
-#sidebar-items .list-group-item.active{
-  background: linear-gradient(90deg, rgba(80,120,224,0.12), rgba(80,120,224,0.06));
-  color: var(--accent-600);
-  font-weight:600;
-  box-shadow: inset 0 -1px 0 rgba(255,255,255,0.5);
-}
-#sidebar-items .list-group-item.active::before{
-  background: var(--accent);
-  transform: scale(1.08);
-}
-
-/* Toggle (falls in HTML vorhanden) */
-#sidebarToggle{
-  display:inline-block;
-  border-radius: 10px;
-  border: 1px solid rgba(47,87,184,0.08);
-  background: linear-gradient(180deg,#fff,#f0f6ff);
-  color: var(--accent-600);
-  padding:8px 12px;
-  font-weight:600;
-  box-shadow: var(--soft-shadow);
-  cursor:pointer;
-  transition: transform var(--trans-fast) ease;
-}
-#sidebarToggle:active{ transform: translateY(1px); }
-
-/* Page content */
-#page-content-wrapper{
-  flex:1 1 auto;
-  transition: transform var(--trans-med) cubic-bezier(.2,.9,.2,1), margin var(--trans-med) ease;
-  padding: 28px;
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
-}
-
-/* Reading column: angenehme Breite */
-.container-fluid{
-  width:100%;
-  max-width: var(--max-read-width);
-  padding-left: 12px;
-  padding-right: 12px;
-}
-
-/* Karten / Lesefläche */
-.tab-pane{
-  width:100%;
-  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,252,255,0.98));
-  border-radius: 16px;
-  padding: var(--tab-padding);
-  box-shadow: var(--card-shadow);
-  margin-bottom: 22px;
-  min-height: 640px;
-  transition: transform var(--trans-fast) ease, opacity var(--trans-fast) ease;
+  display: flex;
+  align-items: center;
   position: relative;
   overflow: hidden;
-  color: var(--text);
-  hyphens: auto;
 }
 
-/* Decorative accent bar - etwas dezenter für besseren Kontrast zur Karte */
-.tab-pane::after{
-  content:'';
-  position:absolute;
-  left:0;
-  top:0;
-  bottom:0;
-  width:6px;
-  background: linear-gradient(180deg, rgba(80,120,224,0.9), rgba(47,87,184,0.8));
-  border-top-left-radius: var(--radius);
-  border-bottom-left-radius: var(--radius);
-  opacity:0.98;
+#sidebar-items .list-group-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 3px;
+  background: var(--accent);
+  transform: scaleY(0);
+  transition: transform var(--trans-fast);
+  border-radius: 0 4px 4px 0;
 }
 
-/* Typografie: harmonisch, linksbündig, spacious */
-h2{
-  color: var(--accent-600);
-  font-size: 1.5rem;
-  margin: 0 0 0.85rem 0;
-  line-height: 1.22;
+#sidebar-items .list-group-item:hover {
+  background: var(--accent-light);
+  color: var(--accent-hover);
+  padding-left: 1.5rem; /* Smoother indent effect */
+}
+
+#sidebar-items .list-group-item.active {
+  background: white;
+  color: var(--accent);
   font-weight: 600;
-  letter-spacing: 0.2px;
-  text-align: left;
-}
-p{
-  color: var(--text);
-  margin: 0 0 var(--para-box-gap) 0;   /* größerer Abstand zwischen Absätzen */
-  font-size: 1.04rem;
-  line-height: 1.9;          /* gut lesbar in Boxen */
-  word-spacing: var(--reading-word-spacing);
-  text-align: left;        /* kein Blocksatz -> besserer Lesefluss */
-  hyphens: auto;
+  box-shadow: var(--soft-shadow);
 }
 
-/* Hervorhebung / Intro */
-.lead {
-  font-size: 1.08rem;
-  color: #15323a;
-  margin-bottom: 1.25rem;
-  font-weight: 400;
-  opacity: 0.95;
+#sidebar-items .list-group-item.active::before {
+  transform: scaleY(0.6);
 }
 
-/* Listen: mehr Luft und klare Bullet-Position */
-ul{
-  margin: 0 0 1.6rem 1.25rem;
-  color: var(--text);
-  line-height: 1.85;
-}
-ul li{
-  margin-bottom: .75rem;
-  color: var(--text);
+/* Toggle Button Navbar */
+.navbar {
+  background: transparent !important;
+  border: none !important;
+  margin-bottom: -1rem; /* Zieht Content etwas hoch */
+  padding-top: 1rem;
 }
 
-/* Links und kleine Elemente */
-a{ color: var(--accent); text-decoration: none; font-weight: 600; }
-a:hover{ text-decoration: underline; color: var(--accent-600); }
+#sidebarToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  box-shadow: var(--soft-shadow);
+  cursor: pointer;
+  transition: all var(--trans-fast);
+}
 
-/* Blockquote für Zitate / Hinweise */
-blockquote{
-  margin: 0 0 1.6rem 0;
-  padding: 14px 18px;
-  border-left: 4px solid rgba(63,111,230,0.18);
-  background: linear-gradient(180deg, rgba(63,111,230,0.03), transparent);
-  color: #16323a;
-  border-radius: 8px;
+#sidebarToggle:hover {
+  background: white;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.05);
+}
+
+#sidebarToggle:active {
+  transform: translateY(1px);
+}
+
+/* Reading column */
+.container-fluid {
+  width: 100%;
+  max-width: var(--max-read-width);
+}
+
+/* Karten / Lesefläche (Premium Glassmorphism) */
+.tab-pane {
+  width: 100%;
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: var(--radius-lg);
+  padding: 3.5rem;
+  box-shadow: var(--card-shadow);
+  min-height: 600px;
+  transition:
+    opacity 300ms ease,
+    transform 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Smooth Tab Transition Effect */
+.tab-pane.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tab-pane[hidden] {
+  display: none !important;
+}
+
+/* Decorative accent bar oben an der Karte (Moderner) */
+.tab-pane::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), #6366f1);
+  border-top-left-radius: var(--radius-lg);
+  border-top-right-radius: var(--radius-lg);
+}
+
+/* Entferne alte Seitenleiste Accent */
+.tab-pane::after {
+  display: none;
+}
+
+/* Blockquote / Callouts */
+blockquote {
+  margin: 2rem 0;
+  padding: 1.5rem 2rem;
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.05),
+    rgba(59, 130, 246, 0.01)
+  );
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(59, 130, 246, 0.1);
   font-style: italic;
+  color: #1e293b;
 }
 
-/* Kleine Details: first-paragraph slightly larger */
-.tab-pane p:first-of-type {
-  margin-top: 0;
+blockquote::before {
+  content: '"';
+  font-size: 4rem;
+  color: rgba(59, 130, 246, 0.2);
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  font-family: serif;
 }
 
 /* Feinabstimmung mobile */
-@media (max-width: 767.98px){
-  :root{ --max-read-width: 720px; --reading-line-height: 1.85; }
-  body{ font-size:16px; }
-  .tab-pane{ padding: var(--tab-padding); min-height: auto; }
-  p{ margin-bottom: 1.2rem; }
+@media (max-width: 767.98px) {
+  :root {
+    --max-read-width: 720px;
+    --reading-line-height: 1.85;
+  }
+  body {
+    font-size: 16px;
+  }
+  .tab-pane {
+    padding: var(--tab-padding);
+    min-height: auto;
+  }
+  p {
+    margin-bottom: 1.2rem;
+  }
 }
 
 /* Sidebar hide: slide left and free space */
-#wrapper.toggled #sidebar-wrapper{
+#wrapper.toggled #sidebar-wrapper {
   transform: translateX(calc(-1 * var(--sidebar-width)));
   width: 0;
   opacity: 0;
@@ -502,67 +410,104 @@ blockquote{
 }
 
 /* Shift content left when sidebar hidden (desktop) */
-#wrapper.toggled #page-content-wrapper{
+#wrapper.toggled #page-content-wrapper {
   transform: translateX(calc(-1 * var(--sidebar-width)));
 }
 
 /* Ensure tab-content keeps layout */
-.tab-content{ width:100%; }
+.tab-content {
+  width: 100%;
+}
 
 /* Micro-animations for list items */
-#sidebar-items .list-group-item{
+#sidebar-items .list-group-item {
   will-change: transform, background-color;
 }
-#sidebar-items .list-group-item:focus{
+#sidebar-items .list-group-item:focus {
   outline: none;
-  box-shadow: 0 0 0 4px rgba(91,123,196,0.08);
+  box-shadow: 0 0 0 4px rgba(91, 123, 196, 0.08);
 }
 
 /* Responsive rules */
-@media (max-width: 992px){
-  :root{ --max-read-width: 740px; }
-  .tab-pane{ min-height: 480px; padding: 22px; }
-}
-@media (max-width: 767.98px){
-  #sidebar-wrapper{
-    position:absolute;
-    top:0;left:0;bottom:0;
-    height:100%;
-    transform: translateX(0);
-    box-shadow: 0 20px 40px rgba(6,22,46,0.12);
+@media (max-width: 992px) {
+  :root {
+    --max-read-width: 740px;
   }
-  #wrapper.toggled #sidebar-wrapper{
+  .tab-pane {
+    min-height: 480px;
+    padding: 22px;
+  }
+}
+@media (max-width: 767.98px) {
+  #sidebar-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100%;
+    transform: translateX(0);
+    box-shadow: 0 20px 40px rgba(6, 22, 46, 0.12);
+  }
+  #wrapper.toggled #sidebar-wrapper {
     transform: translateX(calc(-1 * var(--sidebar-width)));
   }
   /* On mobile don't shift the whole page content (overlay sidebar) */
-  #wrapper.toggled #page-content-wrapper{ transform: translateX(0); }
-  .tab-pane{ min-height:auto; padding:var(--tab-padding); }
-  .container-fluid{ padding-left:12px; padding-right:12px; }
+  #wrapper.toggled #page-content-wrapper {
+    transform: translateX(0);
+  }
+  .tab-pane {
+    min-height: auto;
+    padding: var(--tab-padding);
+  }
+  .container-fluid {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
 }
 
 /* Dark-mode fallback: respect user preference */
-@media (prefers-color-scheme: dark){
-  :root{
+@media (prefers-color-scheme: dark) {
+  :root {
     --bg-1: #071023;
     --bg-2: #071a2b;
-    --glass: rgba(12,18,25,0.6);
+    --glass: rgba(12, 18, 25, 0.6);
     --muted: #97a6b4;
     --accent: #7ea8ff;
     --accent-600: #a6c0ff;
-    --card-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
   }
-  body{
-    background: linear-gradient(180deg,var(--bg-1), var(--bg-2));
-    color:#e9f1ff;
+  body {
+    background: linear-gradient(180deg, var(--bg-1), var(--bg-2));
+    color: #e9f1ff;
   }
-  #sidebar-wrapper{ border-right: 1px solid rgba(255,255,255,0.03); }
-  .tab-pane{ background: linear-gradient(180deg, rgba(10,18,28,0.6), rgba(8,14,20,0.6)); }
-  .tab-pane::after{ background: linear-gradient(180deg, var(--accent), var(--accent-600)); }
+  #sidebar-wrapper {
+    border-right: 1px solid rgba(255, 255, 255, 0.03);
+  }
+  .tab-pane {
+    background: linear-gradient(
+      180deg,
+      rgba(10, 18, 28, 0.6),
+      rgba(8, 14, 20, 0.6)
+    );
+  }
+  .tab-pane::after {
+    background: linear-gradient(180deg, var(--accent), var(--accent-600));
+  }
 }
 
 /* Print rules */
-@media print{
-  body{ background: #fff; color:#000; }
-  #sidebar-wrapper, #sidebarToggle{ display:none; }
-  .tab-pane{ box-shadow:none; background:transparent; border-radius:0; }
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+  }
+  #sidebar-wrapper,
+  #sidebarToggle {
+    display: none;
+  }
+  .tab-pane {
+    box-shadow: none;
+    background: transparent;
+    border-radius: 0;
+  }
 }
