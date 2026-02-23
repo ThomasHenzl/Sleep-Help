@@ -9,8 +9,9 @@
   --bg-main: #f8fafc; /* Slate 50 für Hintergrund */
   --bg-card: rgba(255, 255, 255, 0.85); /* Glassmorphism Base */
 
-  --text-primary: #334155; /* Slate 700 */
-  --text-muted: #64748b; /* Slate 500 */
+  --text-primary: #526b7a; /* Hellerer, sanfter Blaugrau-Ton */
+  --text-muted: #748c9c; /* Noch etwas heller für sekundären Text */
+  --text-heading: #1e3a8a; /* Kontrastreiches, kräftiges Royalblau für Überschriften */
 
   /* Harmonische Akzentfarben (Sanftes Blau) */
   --accent: #3b82f6; /* Blue 500 */
@@ -82,7 +83,7 @@ body {
 
 /* Typografie: Modern, Clean */
 h2 {
-  color: #0f172a; /* Slate 900 */
+  color: var(--text-heading); /* Kontrastreiches Blau statt fast Schwarz */
   font-size: 2rem;
   margin: 0 0 1.25rem 0;
   line-height: 1.25;
@@ -381,6 +382,21 @@ blockquote::before {
   top: -10px;
   left: 10px;
   font-family: serif;
+}
+
+/* Styling für Tab-Bilder */
+.tab-image {
+  width: 100%;
+  max-height: 440px;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  margin-bottom: 2rem;
+  box-shadow: var(--soft-shadow);
+  transition: transform var(--trans-med);
+}
+
+.tab-image:hover {
+  transform: scale(1.015);
 }
 
 /* Feinabstimmung mobile */
