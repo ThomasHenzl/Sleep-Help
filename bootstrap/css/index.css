@@ -1,8 +1,57 @@
-/* ...existing code... */
+/* Ruhiges, modernes Theme für Sleep-Help */
 
-/* Seitenbreite als Variable verwenden */
-:root {
-  --sidebar-width: 260px;
+/* Google Font import -> setzt bessere Schrift für harmonische Typografie */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+:root{
+  --sidebar-width: 340px;     /* breitere Sidebar */
+  --bg-1: #f6fbff;
+  --bg-2: #eef6fb;
+  --glass: rgba(255,255,255,0.78);
+  --muted: #5b6b78;           /* dezentes, gut lesbares Grau */
+  --text: #5fcff5;            /* dunkle, warme Textfarbe für optimalen Kontrast */
+  --accent: #3f6fe6;
+  --accent-600: #2f57b8;
+  --accent-100: rgba(63,111,230,0.08);
+  --card-shadow: 0 14px 40px rgba(12,30,60,0.06);
+  --soft-shadow: 0 6px 22px rgba(12,30,60,0.04);
+  --radius: 14px;
+  --max-read-width: 1100px;   /* deutlich breitere Lesespalte */
+  --tab-padding: 40px;
+  --para-box-padding: 18px;
+  --para-box-radius: 12px;
+  --para-box-gap: 18px;
+  --trans-fast: 180ms;
+  --trans-med: 360ms;
+
+  /* Lesestil */
+  --reading-line-height: 1.95;
+  --reading-letter-spacing: 0.12px;
+  --reading-word-spacing: 0.18px;
+}
+
+/* Base */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body{
+  margin: 0;
+  font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(63,111,230,0.03), transparent),
+              linear-gradient(180deg,var(--bg-1), var(--bg-2));
+  color: var(--text);
+  font-size: 17px;                         /* leicht größere Basisgröße */
+  line-height: var(--reading-line-height); /* luftiger Zeilenabstand */
+  letter-spacing: var(--reading-letter-spacing);
+  -webkit-font-variant-ligatures: none;
+}
+
+/* Wrapper Layout */
+#wrapper{
+  display:flex;
+  min-height:100vh;
+  overflow:hidden;
 }
 
 /* Content-Shift: verschiebe rechten Bereich, wenn Sidebar verschwindet */
@@ -32,53 +81,488 @@
 
 /* Sidebar-Grundstil */
 #sidebar-wrapper {
-  width: 260px;
-  flex: 0 0 260px;
-  transition: transform .36s cubic-bezier(.2,.9,.2,1), width .36s ease, opacity .28s ease;
+  width: var(--sidebar-width);
+  flex: 0 0 var(--sidebar-width);
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(245,250,255,0.96));
+  border-right: 1px solid rgba(15,30,60,0.04);
+  padding: 14px 12px;
+  transition: transform var(--trans-med) cubic-bezier(.2,.9,.2,1), width var(--trans-med) ease, opacity var(--trans-fast) ease;
   transform: translateX(0);
-  opacity: 1;
+  opacity:1;
+  z-index: 1200;
+  backdrop-filter: blur(4px) saturate(120%);
+}
+
+/* Sidebar header */
+.sidebar-heading{
+  padding: 12px 14px;
+  font-weight:700;
+  color: var(--accent-600);
+  letter-spacing: 0.6px;
+  font-size: 1.05rem;
+}
+
+/* Sidebar list */
+#sidebar-items{
+  margin-top:6px;
+  padding: 8px;
+}
+#sidebar-items .list-group-item{
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  padding: 14px 16px;
+  margin: 10px 8px;
+  border-radius: 10px;
+  transition: transform var(--trans-fast) ease, background-color var(--trans-fast) ease, color var(--trans-fast) ease, box-shadow var(--trans-fast) ease;
+  cursor: pointer;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+#sidebar-items .list-group-item::before{
+  content: '';
+  width:8px; height:8px;
+  border-radius:50%;
+  background: transparent;
+  transition: background-color var(--trans-fast) ease, transform var(--trans-fast) ease;
+}
+#sidebar-items .list-group-item:hover{
+  background: var(--accent-100);
+  color: var(--accent-600);
+  transform: translateX(6px);
+}
+#sidebar-items .list-group-item.active{
+  background: linear-gradient(90deg, rgba(80,120,224,0.12), rgba(80,120,224,0.06));
+  color: var(--accent-600);
+  font-weight:600;
+  box-shadow: inset 0 -1px 0 rgba(255,255,255,0.5);
+}
+#sidebar-items .list-group-item.active::before{
+  background: var(--accent);
+  transform: scale(1.08);
+}
+
+/* Toggle (falls in HTML vorhanden) */
+#sidebarToggle{
+  display:inline-block;
+  border-radius: 10px;
+  border: 1px solid rgba(47,87,184,0.08);
+  background: linear-gradient(180deg,#fff,#f0f6ff);
+  color: var(--accent-600);
+  padding:8px 12px;
+  font-weight:600;
+  box-shadow: var(--soft-shadow);
+  cursor:pointer;
+  transition: transform var(--trans-fast) ease;
+}
+#sidebarToggle:active{ transform: translateY(1px); }
+
+/* Page content */
+#page-content-wrapper{
+  flex:1 1 auto;
+  transition: transform var(--trans-med) cubic-bezier(.2,.9,.2,1), margin var(--trans-med) ease;
+  padding: 28px;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+}
+
+/* Reading column: angenehme Breite */
+.container-fluid{
+  width:100%;
+  max-width: var(--max-read-width);
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+/* Karten / Lesefläche */
+.tab-pane{
+  width:100%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,252,255,0.98));
+  border-radius: 16px;
+  padding: var(--tab-padding);
+  box-shadow: var(--card-shadow);
+  margin-bottom: 22px;
+  min-height: 640px;
+  transition: transform var(--trans-fast) ease, opacity var(--trans-fast) ease;
+  position: relative;
   overflow: hidden;
-  background: #fff;
-  z-index: 1020;
+  color: var(--text);
+  hyphens: auto;
 }
 
-/* Content nimmt verbleibenden Platz ein */
+/* Decorative accent bar - etwas dezenter für besseren Kontrast zur Karte */
+.tab-pane::after{
+  content:'';
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:6px;
+  background: linear-gradient(180deg, rgba(80,120,224,0.9), rgba(47,87,184,0.8));
+  border-top-left-radius: var(--radius);
+  border-bottom-left-radius: var(--radius);
+  opacity:0.98;
+}
+
+/* Typografie: harmonisch, linksbündig, spacious */
+h2{
+  color: var(--accent-600);
+  font-size: 1.5rem;
+  margin: 0 0 0.85rem 0;
+  line-height: 1.22;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  text-align: left;
+}
+p{
+  color: var(--text);
+  margin: 0 0 var(--para-box-gap) 0;   /* größerer Abstand zwischen Absätzen */
+  font-size: 1.04rem;
+  line-height: 1.9;          /* gut lesbar in Boxen */
+  word-spacing: var(--reading-word-spacing);
+  text-align: left;        /* kein Blocksatz -> besserer Lesefluss */
+  hyphens: auto;
+}
+
+/* Hervorhebung / Intro */
+.lead {
+  font-size: 1.08rem;
+  color: #15323a;
+  margin-bottom: 1.25rem;
+  font-weight: 400;
+  opacity: 0.95;
+}
+
+/* Listen: mehr Luft und klare Bullet-Position */
+ul{
+  margin: 0 0 1.6rem 1.25rem;
+  color: var(--text);
+  line-height: 1.85;
+}
+ul li{
+  margin-bottom: .75rem;
+  color: var(--text);
+}
+
+/* Links und kleine Elemente */
+a{ color: var(--accent); text-decoration: none; font-weight: 600; }
+a:hover{ text-decoration: underline; color: var(--accent-600); }
+
+/* Blockquote für Zitate / Hinweise */
+blockquote{
+  margin: 0 0 1.6rem 0;
+  padding: 14px 18px;
+  border-left: 4px solid rgba(63,111,230,0.18);
+  background: linear-gradient(180deg, rgba(63,111,230,0.03), transparent);
+  color: #16323a;
+  border-radius: 8px;
+  font-style: italic;
+}
+
+/* Kleine Details: first-paragraph slightly larger */
+.tab-pane p:first-of-type {
+  margin-top: 0;
+}
+
+/* Wrapper Layout */
+#wrapper{
+  display:flex;
+  min-height:100vh;
+  overflow:hidden;
+}
+
+/* Content-Shift: verschiebe rechten Bereich, wenn Sidebar verschwindet */
 #page-content-wrapper {
-  flex: 1 1 auto;
-  transition: margin .36s ease;
+  transform: translateX(0);
+  transition: transform .36s cubic-bezier(.2,.9,.2,1);
 }
 
-/* Zustand: ausgeblendete Sidebar -> nach links schieben und Platz freigeben */
-#wrapper.toggled #sidebar-wrapper {
-  transform: translateX(-260px); /* rutscht nach links */
-  width: 0;                      /* gibt Platz für Content frei */
+/* Wenn wrapper.toggled gesetzt ist (Menu geklickt), verschiebe Content nach links */
+#wrapper.toggled #page-content-wrapper {
+  transform: translateX(calc(-1 * var(--sidebar-width)));
+}
+
+/* Auf mobilen Geräten soll der Content nicht zusätzlich verschoben werden,
+   da die Sidebar dort überlagert wird */
+@media (max-width: 767.98px) {
+  #wrapper.toggled #page-content-wrapper {
+    transform: translateX(0);
+  }
+}
+
+/* Sidebar: Slide-left hide behavior */
+#wrapper {
+  display: flex; /* Wrapper als flex-container (Sidebar + Content) */
+  overflow: hidden;
+}
+
+/* Sidebar-Grundstil */
+#sidebar-wrapper {
+  width: var(--sidebar-width);
+  flex: 0 0 var(--sidebar-width);
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(245,250,255,0.96));
+  border-right: 1px solid rgba(15,30,60,0.04);
+  padding: 14px 12px;
+  transition: transform var(--trans-med) cubic-bezier(.2,.9,.2,1), width var(--trans-med) ease, opacity var(--trans-fast) ease;
+  transform: translateX(0);
+  opacity:1;
+  z-index: 1200;
+  backdrop-filter: blur(4px) saturate(120%);
+}
+
+/* Sidebar header */
+.sidebar-heading{
+  padding: 12px 14px;
+  font-weight:700;
+  color: var(--accent-600);
+  letter-spacing: 0.6px;
+  font-size: 1.05rem;
+}
+
+/* Sidebar list */
+#sidebar-items{
+  margin-top:6px;
+  padding: 8px;
+}
+#sidebar-items .list-group-item{
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  padding: 14px 16px;
+  margin: 10px 8px;
+  border-radius: 10px;
+  transition: transform var(--trans-fast) ease, background-color var(--trans-fast) ease, color var(--trans-fast) ease, box-shadow var(--trans-fast) ease;
+  cursor: pointer;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+#sidebar-items .list-group-item::before{
+  content: '';
+  width:8px; height:8px;
+  border-radius:50%;
+  background: transparent;
+  transition: background-color var(--trans-fast) ease, transform var(--trans-fast) ease;
+}
+#sidebar-items .list-group-item:hover{
+  background: var(--accent-100);
+  color: var(--accent-600);
+  transform: translateX(6px);
+}
+#sidebar-items .list-group-item.active{
+  background: linear-gradient(90deg, rgba(80,120,224,0.12), rgba(80,120,224,0.06));
+  color: var(--accent-600);
+  font-weight:600;
+  box-shadow: inset 0 -1px 0 rgba(255,255,255,0.5);
+}
+#sidebar-items .list-group-item.active::before{
+  background: var(--accent);
+  transform: scale(1.08);
+}
+
+/* Toggle (falls in HTML vorhanden) */
+#sidebarToggle{
+  display:inline-block;
+  border-radius: 10px;
+  border: 1px solid rgba(47,87,184,0.08);
+  background: linear-gradient(180deg,#fff,#f0f6ff);
+  color: var(--accent-600);
+  padding:8px 12px;
+  font-weight:600;
+  box-shadow: var(--soft-shadow);
+  cursor:pointer;
+  transition: transform var(--trans-fast) ease;
+}
+#sidebarToggle:active{ transform: translateY(1px); }
+
+/* Page content */
+#page-content-wrapper{
+  flex:1 1 auto;
+  transition: transform var(--trans-med) cubic-bezier(.2,.9,.2,1), margin var(--trans-med) ease;
+  padding: 28px;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+}
+
+/* Reading column: angenehme Breite */
+.container-fluid{
+  width:100%;
+  max-width: var(--max-read-width);
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+/* Karten / Lesefläche */
+.tab-pane{
+  width:100%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,252,255,0.98));
+  border-radius: 16px;
+  padding: var(--tab-padding);
+  box-shadow: var(--card-shadow);
+  margin-bottom: 22px;
+  min-height: 640px;
+  transition: transform var(--trans-fast) ease, opacity var(--trans-fast) ease;
+  position: relative;
+  overflow: hidden;
+  color: var(--text);
+  hyphens: auto;
+}
+
+/* Decorative accent bar - etwas dezenter für besseren Kontrast zur Karte */
+.tab-pane::after{
+  content:'';
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:6px;
+  background: linear-gradient(180deg, rgba(80,120,224,0.9), rgba(47,87,184,0.8));
+  border-top-left-radius: var(--radius);
+  border-bottom-left-radius: var(--radius);
+  opacity:0.98;
+}
+
+/* Typografie: harmonisch, linksbündig, spacious */
+h2{
+  color: var(--accent-600);
+  font-size: 1.5rem;
+  margin: 0 0 0.85rem 0;
+  line-height: 1.22;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  text-align: left;
+}
+p{
+  color: var(--text);
+  margin: 0 0 var(--para-box-gap) 0;   /* größerer Abstand zwischen Absätzen */
+  font-size: 1.04rem;
+  line-height: 1.9;          /* gut lesbar in Boxen */
+  word-spacing: var(--reading-word-spacing);
+  text-align: left;        /* kein Blocksatz -> besserer Lesefluss */
+  hyphens: auto;
+}
+
+/* Hervorhebung / Intro */
+.lead {
+  font-size: 1.08rem;
+  color: #15323a;
+  margin-bottom: 1.25rem;
+  font-weight: 400;
+  opacity: 0.95;
+}
+
+/* Listen: mehr Luft und klare Bullet-Position */
+ul{
+  margin: 0 0 1.6rem 1.25rem;
+  color: var(--text);
+  line-height: 1.85;
+}
+ul li{
+  margin-bottom: .75rem;
+  color: var(--text);
+}
+
+/* Links und kleine Elemente */
+a{ color: var(--accent); text-decoration: none; font-weight: 600; }
+a:hover{ text-decoration: underline; color: var(--accent-600); }
+
+/* Blockquote für Zitate / Hinweise */
+blockquote{
+  margin: 0 0 1.6rem 0;
+  padding: 14px 18px;
+  border-left: 4px solid rgba(63,111,230,0.18);
+  background: linear-gradient(180deg, rgba(63,111,230,0.03), transparent);
+  color: #16323a;
+  border-radius: 8px;
+  font-style: italic;
+}
+
+/* Kleine Details: first-paragraph slightly larger */
+.tab-pane p:first-of-type {
+  margin-top: 0;
+}
+
+/* Feinabstimmung mobile */
+@media (max-width: 767.98px){
+  :root{ --max-read-width: 720px; --reading-line-height: 1.85; }
+  body{ font-size:16px; }
+  .tab-pane{ padding: var(--tab-padding); min-height: auto; }
+  p{ margin-bottom: 1.2rem; }
+}
+
+/* Sidebar hide: slide left and free space */
+#wrapper.toggled #sidebar-wrapper{
+  transform: translateX(calc(-1 * var(--sidebar-width)));
+  width: 0;
   opacity: 0;
   pointer-events: none;
 }
 
-/* Optional: sanfter Schatten, wenn sichtbar */
-#sidebar-wrapper:not([style*="width: 0"]) {
-  box-shadow: 0 2px 12px rgba(8,20,40,0.05);
+/* Shift content left when sidebar hidden (desktop) */
+#wrapper.toggled #page-content-wrapper{
+  transform: translateX(calc(-1 * var(--sidebar-width)));
 }
 
-/* Mobile: gleiche Logik, aber Sidebar über Content legen (falls gewünscht) */
-@media (max-width: 767.98px) {
-  #sidebar-wrapper {
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    height: 100%;
+/* Ensure tab-content keeps layout */
+.tab-content{ width:100%; }
+
+/* Micro-animations for list items */
+#sidebar-items .list-group-item{
+  will-change: transform, background-color;
+}
+#sidebar-items .list-group-item:focus{
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(80,120,224,0.08);
+}
+
+/* Responsive rules */
+@media (max-width: 992px){
+  :root{ --max-read-width: 740px; }
+  .tab-pane{ min-height: 480px; padding: 22px; }
+}
+@media (max-width: 767.98px){
+  #sidebar-wrapper{
+    position:absolute;
+    top:0;left:0;bottom:0;
+    height:100%;
+    transform: translateX(0);
+    box-shadow: 0 20px 40px rgba(6,22,46,0.12);
   }
-  #wrapper.toggled #sidebar-wrapper {
-    transform: translateX(-100%);
-    width: 0;
+  #wrapper.toggled #sidebar-wrapper{
+    transform: translateX(calc(-1 * var(--sidebar-width)));
   }
+  /* On mobile don't shift the whole page content (overlay sidebar) */
+  #wrapper.toggled #page-content-wrapper{ transform: translateX(0); }
+  .tab-pane{ min-height:auto; padding:var(--tab-padding); }
+  .container-fluid{ padding-left:12px; padding-right:12px; }
 }
 
-/* Optional: Übergangsfeinheiten für Buttons / Links */
-#sidebarToggle {
-  transition: background-color .18s ease, color .18s ease;
+/* Dark-mode fallback: respect user preference */
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg-1: #071023;
+    --bg-2: #071a2b;
+    --glass: rgba(12,18,25,0.6);
+    --muted: #97a6b4;
+    --accent: #7ea8ff;
+    --accent-600: #a6c0ff;
+    --card-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  }
+  body{
+    background: linear-gradient(180deg,var(--bg-1), var(--bg-2));
+    color:#e9f1ff;
+  }
+  #sidebar-wrapper{ border-right: 1px solid rgba(255,255,255,0.03); }
+  .tab-pane{ background: linear-gradient(180deg, rgba(10,18,28,0.6), rgba(8,14,20,0.6)); }
+  .tab-pane::after{ background: linear-gradient(180deg, var(--accent), var(--accent-600)); }
 }
 
-/* ...existing code... */
+/* Print rules */
+@media print{
+  body{ background: #fff; color:#000; }
+  #sidebar-wrapper, #sidebarToggle{ display:none; }
+  .tab-pane{ box-shadow:none; background:transparent; border-radius:0; }
+}
