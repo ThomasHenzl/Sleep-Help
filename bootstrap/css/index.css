@@ -9,9 +9,9 @@
   --bg-main: #f8fafc; /* Slate 50 für Hintergrund */
   --bg-card: rgba(255, 255, 255, 0.85); /* Glassmorphism Base */
 
-  --text-primary: #526b7a; /* Hellerer, sanfter Blaugrau-Ton */
+  --text-primary: #dbe5ec; /* Hellerer, sanfter Blaugrau-Ton */
   --text-muted: #748c9c; /* Noch etwas heller für sekundären Text */
-  --text-heading: #1e3a8a; /* Kontrastreiches, kräftiges Royalblau für Überschriften */
+  --text-heading: #5c7edc; /* Kontrastreiches, kräftiges Royalblau für Überschriften */
 
   /* Harmonische Akzentfarben (Sanftes Blau) */
   --accent: #3b82f6; /* Blue 500 */
