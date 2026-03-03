@@ -1,60 +1,63 @@
-# **Website Project Description — Sleep Optimizer**
+# Projekt: Sleep-Help — Projektbeschreibung (vollständiger Inhaltsüberblick)
 
-## **1. Project Title**
-**Sleep Optimizer: Tips for Better Rest**
+## Kurzbeschreibung
+Sleep-Help ist eine responsive, statische Website, die Informationen, Tipps und visuelle Hilfen zum Thema Schlafqualität bereitstellt. Die Projektstruktur ist bewusst schlank gehalten und nutzt HTML/CSS/JS (Bootstrap-CDN) für Layout und Interaktion.
 
----
+## Ordnerstruktur (im Projektordner)
+- bootstrap/
+  - index.html — Startseite / Single‑Page-Layout mit Sidebar und Content-Bereich
+  - assets/
+    - favicon.ico — kleines Icon für Browser-Tab
+  - css/
+    - index.css — primäres Projektstylesheet (Theme, Layout, Sidebar, Karten, Typografie)
+    - styles.css — zusätzliche oder ergänzende Styles (Feinabstimmungen, Erweiterungen)
+  - js/
+    - scripts.js — kleine Vanilla-JS-Skripte für Sidebar-Toggle, Tab‑Logik und UI-Interaktion
 
-## **2. Project Idea**
-This website will help people improve their sleep habits and understand why good sleep matters. It will include tips for routines, relaxation, screen-time control, and foods that help with sleep.
+## Detaillierte Beschreibung der Dateien
+- index.html
+  - Enthält das HTML-Grundgerüst der Seite (doctype, meta, title).
+  - Verlinkt Bootstrap via CDN sowie die lokalen CSS-Dateien.
+  - Bietet die Sidebar-Navigation, einen Top-Navbar‑Platzhalter und den zentralen Content-Container (.container-fluid).
+  - Bindet das lokale JS (js/scripts.js) am Seitenende.
 
-Good sleep improves focus, energy, and mood — this website will give simple strategies anyone can follow to sleep better and feel healthier.
+- assets/favicon.ico
+  - Favicon für Browser-Tabs / Lesezeichen. Liefert visuelle Identität im Browser.
 
----
+- css/index.css
+  - Hauptstylesheet: definiert Farben, Layout-Variablen, Sidebar-Verhalten, Lesespalte, Karten-Design, Typografie und Responsivität.
+  - Enthält Regeln für das Verschieben/Einblenden der Sidebar und das Shiften des Inhaltsbereichs.
 
-## **3. Target Audience**
-The website is designed for **teenagers and young adults (ages 13–25)** who want to improve their sleep quality.
+- css/styles.css
+  - Ergänzende Styles (Utility-Klassen, Feinanpassungen, zusätzliche Komponenten oder thematische Erweiterungen).
+  - Dient als Platz für Experimente, alternative Farbvarianten oder zukünftige Komponenten.
 
-It will be helpful because it provides easy routines, helpful tips, and science-based information in simple language that students and busy people can follow.
+- js/scripts.js
+  - Verwaltung des Sidebar-Toggles (Ein-/Ausblenden, lokale Speicherung des Zustands).
+  - Brücke zwischen Sidebar-Links und Tab-Panes: setzt aktive Klassen und zeigt die zugehörigen Inhalte.
+  - Enthält responsive Hilfslogik (z. B. Verhalten auf kleinen Bildschirmen).
 
----
+## Zielgruppe
+- Zielgruppe: Jugendliche und junge Erwachsene, Lehrkräfte und interessierte Laien.
 
-## **4. Structure of the Website**
-
-| File | Page Name | Description |
-|------|----------|-------------|
-| `index.html` | Home | Welcome page and overview of sleep benefits |
-| `routines.html` | Sleep Routines | Bedtime routine ideas and habits for better sleep |
-| `foods.html` | Sleep & Nutrition | Foods that support sleep and things to avoid |
-| `relaxation.html` | Relaxation Zone | Breathing exercises, calming music, stretches |
-
----
-
-## **5. Design and Layout**
-
-- **Colors:** Soft blue, lavender, white (calming theme)
-- **Fonts:** Smooth rounded fonts (Poppins, Nunito)
-- **Graphics:** Moon + star icons, soft gradients
-- **Navigation:** Menu at the top of all pages
-- **Consistent Elements:** Header, navigation bar, footer with motivational sleep quote
-
----
-
-## **6. Milestones**
-
-| Week | Task |
-|------|------|
-| Week 1 | Plan content and design layout |
-| Week 2 | Create HTML structure for all pages |
-| Week 3 | Add CSS styling, icons, and images |
-| Week 4 | Test website, fix issues, present final project |
-
----
-
-## **7. Special Features (optional)**
-
-- Sleep checklist
-- Light/Dark theme toggle
-- Smooth scroll + fade-in effects
-- Sleep-timer suggestion chart (e.g., if you wake at 7am, sleep at 11pm)
-
+## Ziel
+- Dark/Light Mode
+- Schlafumgebungs-Check
+    - Interaktiver Raum-Check:
+        - Temperatur
+        - Licht 
+        - Lärm
+        - Matratze
+    - Konkrete Optimierungsvorschläge
+- Personalisierter Schlaf-Check
+    - Kurzer interaktiver Fragebogen (Schlafdauer, Einschlafzeit, Stresslevel, Koffein etc.)
+    - Sofortige Auswertung mit individueller Empfehlung
+- Interaktive Nachtwelt(Darkmode)
+    - Der Hintergrund ist ein Sternenhimmel und bewegt sich mit der Maus
+- Mini-Entspannungs-Spiel im Browser
+    - Gedanken-Bubbles platzen lassen
+    - Atemspiel (Kreis vergrößert/verkleinert sich)#
+- Interaktive Morgenwelt (Lightmode)
+    - Sanfter Sonnenaufgang im Hintergrund
+    - Wolken bewegen sich langsam
+    - Vögel fliegen bei Mausbewegung
