@@ -56,7 +56,7 @@ Sleep-Help ist eine responsive, statische Website, die Informationen, Tipps und 
     - Der Hintergrund ist ein Sternenhimmel und bewegt sich mit der Maus
 - Mini-Entspannungs-Spiel im Browser
     - Gedanken-Bubbles platzen lassen
-    - Atemspiel (Kreis vergrößert/verkleinert sich)#
+    - Atemspiel (Kreis vergrößert/verkleinert sich)
 - Interaktive Morgenwelt (Lightmode)
     - Sanfter Sonnenaufgang im Hintergrund
     - Wolken bewegen sich langsam
