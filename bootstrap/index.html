@@ -19,48 +19,13 @@
       <div class="border-end bg-white" id="sidebar-wrapper">
         <div class="sidebar-heading border-bottom bg-light">Sleep-Help</div>
         <div class="list-group list-group-flush" id="sidebar-items">
-          <a
-            class="list-group-item list-group-item-action p-3"
-            href="#"
-            data-target="tab1"
-            >Warum guter Schlaf …</a
-          >
-          <a
-            class="list-group-item list-group-item-action p-3"
-            href="#"
-            data-target="tab2"
-            >Matratze kaufen in Linz</a
-          >
-          <a
-            class="list-group-item list-group-item-action p-3"
-            href="#"
-            data-target="tab3"
-            >Die richtige Matratze</a
-          >
-          <a
-            class="list-group-item list-group-item-action p-3"
-            href="#"
-            data-target="tab4"
-            >Einschlafprobleme</a
-          >
-          <a
-            class="list-group-item list-group-item-action p-3"
-            href="#"
-            data-target="tab5"
-            >Praktische Tipps</a
-          >
-          <a
-            class="list-group-item list-group-item-action p-3"
-            href="#"
-            data-target="tab6"
-            >Licht, Luft und Atmung</a
-          >
-          <a
-            class="list-group-item list-group-item-action p-3"
-            href="#"
-            data-target="tab7"
-            >Ganzheitlicher Ansatz</a
-          >
+          <a class="list-group-item list-group-item-action" data-target="#tab1" role="button">Warum guter Schlaf …</a>
+          <a class="list-group-item list-group-item-action" data-target="#tab2" role="button">Matratze kaufen in Linz</a>
+          <a class="list-group-item list-group-item-action" data-target="#tab3" role="button">Die richtige Matratze</a>
+          <a class="list-group-item list-group-item-action" data-target="#tab4" role="button">Einschlafprobleme</a>
+          <a class="list-group-item list-group-item-action" data-target="#tab5" role="button">Praktische Tipps</a>
+          <a class="list-group-item list-group-item-action" data-target="#tab6" role="button">Licht, Luft und Atmung</a>
+          <a class="list-group-item list-group-item-action" data-target="#tab-questionnaire" role="button">Schlaf‑Check</a>
         </div>
       </div>
 
@@ -533,6 +498,72 @@
                   >WHO Report zu Schlaf und Gesundheit</a
                 >)
               </p>
+            </div>
+
+            <!-- Tab Questionnaire -->
+            <div id="tab-questionnaire" class="tab-pane" hidden>
+              <h2 class="mb-3">Schlaf‑Check — kurzer Fragebogen</h2>
+              <p class="lead">Beantworte kurz wenige Fragen, damit du sofort praktische Tipps bekommst.</p>
+              <div class="question-card">
+                <div class="q-row">
+                  <label>1. Wie viele Stunden schläfst du pro Nacht durchschnittlich?</label>
+                  <select id="q-sleep-hours">
+                    <option value="0">weniger als 5</option>
+                    <option value="1">5–6</option>
+                    <option value="2">6–7</option>
+                    <option value="3">7–9</option>
+                    <option value="4">mehr als 9</option>
+                  </select>
+                </div>
+                <div class="q-row">
+                  <label>2. Wie leicht schläfst du ein?</label>
+                  <select id="q-fall-asleep">
+                    <option value="0">sehr schwer</option>
+                    <option value="1">eher schwer</option>
+                    <option value="2">normal</option>
+                    <option value="3">leicht</option>
+                  </select>
+                </div>
+                <div class="q-row">
+                  <label>3. Stört Lärm oder Licht im Schlafzimmer?</label>
+                  <select id="q-noise-light">
+                    <option value="0">stark</option>
+                    <option value="1">mäßig</option>
+                    <option value="2">kaum</option>
+                  </select>
+                </div>
+                <div class="q-row">
+                  <label>4. Wie gemütlich ist dein Bett / Matratze?</label>
+                  <select id="q-mattress">
+                    <option value="0">ungemütlich</option>
+                    <option value="1">durchschnittlich</option>
+                    <option value="2">gut</option>
+                    <option value="3">sehr gut</option>
+                  </select>
+                </div>
+                <div class="q-row">
+                  <label>5. Konsumierst du abends Koffein oder Energydrinks?</label>
+                  <select id="q-caffeine">
+                    <option value="0">ja, oft</option>
+                    <option value="1">manchmal</option>
+                    <option value="2">selten/nie</option>
+                  </select>
+                </div>
+                <div class="q-row">
+                  <label>6. Wie hoch ist dein Stresslevel abends?</label>
+                  <select id="q-stress">
+                    <option value="0">sehr hoch</option>
+                    <option value="1">hoch</option>
+                    <option value="2">mittel</option>
+                    <option value="3">niedrig</option>
+                  </select>
+                </div>
+                <div class="q-actions">
+                  <button id="check-run" class="btn btn-primary">Auswertung anzeigen</button>
+                  <button id="check-reset" class="btn btn-outline-secondary">Zurücksetzen</button>
+                </div>
+                <div id="check-result" class="result-box" aria-live="polite"></div>
+              </div>
             </div>
           </div>
         </div>
