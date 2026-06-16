@@ -1,0 +1,368 @@
+{
+  "tips": [
+    {
+      "id": 1,
+      "category": "schlafhygiene",
+      "title": "Regelmäßige Schlafzeiten",
+      "description": "Geh jeden Tag zur gleichen Zeit ins Bett und steh zur gleichen Zeit auf – auch am Wochenende.",
+      "priority": "hoch"
+    },
+    {
+      "id": 2,
+      "category": "schlafhygiene",
+      "title": "Bildschirmzeit reduzieren",
+      "description": "Vermeide Smartphone, Tablet und Laptop mindestens 60 Minuten vor dem Schlafen.",
+      "priority": "hoch"
+    },
+    {
+      "id": 3,
+      "category": "ernaehrung",
+      "title": "Kein Koffein am Abend",
+      "description": "Ab 14 Uhr kein Kaffee, Cola oder Energydrinks. Koffein hat eine Halbwertszeit von 5–6 Stunden.",
+      "priority": "mittel"
+    },
+    {
+      "id": 4,
+      "category": "umgebung",
+      "title": "Kühle Raumtemperatur",
+      "description": "Die ideale Schlaftemperatur liegt bei 16–18 °C. Ein eher kühles Schlafzimmer fördert das Einschlafen.",
+      "priority": "hoch"
+    },
+    {
+      "id": 5,
+      "category": "umgebung",
+      "title": "Dunkelheit im Schlafzimmer",
+      "description": "Verdunkelungsvorhänge oder eine Schlafmaske helfen, die Melatonin-Produktion zu unterstützen.",
+      "priority": "mittel"
+    },
+    {
+      "id": 6,
+      "category": "entspannung",
+      "title": "4-7-8 Atemtechnik",
+      "description": "4 Sek. einatmen, 7 Sek. halten, 8 Sek. ausatmen. Beruhigt das Nervensystem und fördert das Einschlafen.",
+      "priority": "mittel"
+    },
+    {
+      "id": 7,
+      "category": "entspannung",
+      "title": "Progressive Muskelentspannung",
+      "description": "Spanne und löse jede Muskelgruppe von den Füßen bis zum Kopf für jeweils 5–10 Sekunden.",
+      "priority": "niedrig"
+    },
+    {
+      "id": 8,
+      "category": "bewegung",
+      "title": "Tägliche Bewegung",
+      "description": "30 Minuten moderate Bewegung am Tag verbessern die Schlafqualität, aber nicht direkt vor dem Schlafen.",
+      "priority": "mittel"
+    }
+  ],
+  "sleepChecks": [
+    {
+      "id": 1,
+      "userId": "user-001",
+      "date": "2025-06-15",
+      "sleepHours": 7.5,
+      "fallAsleep": "leicht",
+      "noiseLight": "kaum",
+      "mattressComfort": "gut",
+      "caffeine": "selten",
+      "stressLevel": "mittel",
+      "score": 12,
+      "recommendations": [
+        "Gute Schlafdauer. Achte auf Regelmäßigkeit.",
+        "Mittlerer Stress: versuche abendliche Atemübungen."
+      ]
+    },
+    {
+      "id": 2,
+      "userId": "user-002",
+      "date": "2025-06-14",
+      "sleepHours": 5,
+      "fallAsleep": "schwer",
+      "noiseLight": "stark",
+      "mattressComfort": "ungemütlich",
+      "caffeine": "oft",
+      "stressLevel": "hoch",
+      "score": 4,
+      "recommendations": [
+        "Versuche 7–9 Stunden Schlaf zu erreichen.",
+        "Reduziere Bildschirmzeit 60 min vor dem Schlafen.",
+        "Verdunkelungsvorhänge oder Ohrstöpsel verwenden.",
+        "Matratze: ergonomische Beratung empfohlen.",
+        "Koffein ab 14 Uhr vermeiden."
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "id": "schlafhygiene",
+      "name": "Schlafhygiene",
+      "icon": "🛏️",
+      "color": "#6C63FF"
+    },
+    {
+      "id": "ernaehrung",
+      "name": "Ernährung",
+      "icon": "🥗",
+      "color": "#2ECC71"
+    },
+    {
+      "id": "umgebung",
+      "name": "Schlafumgebung",
+      "icon": "🌙",
+      "color": "#3498DB"
+    },
+    {
+      "id": "entspannung",
+      "name": "Entspannung",
+      "icon": "🧘",
+      "color": "#E74C3C"
+    },
+    {
+      "id": "bewegung",
+      "name": "Bewegung",
+      "icon": "🏃",
+      "color": "#F39C12"
+    }
+  ],
+  "deviceReadings": [
+    {
+      "id": 1,
+      "deviceId": "watch-001",
+      "timestamp": "2025-06-15T23:30:00Z",
+      "temp": 21.3,
+      "pulse": 62,
+      "humidity": 45,
+      "battery": 78
+    },
+    {
+      "id": 2,
+      "deviceId": "watch-001",
+      "timestamp": "2025-06-16T02:15:00Z",
+      "temp": 19.8,
+      "pulse": 55,
+      "humidity": 48,
+      "battery": 72
+    }
+  ],
+  "steps": [
+    {
+      "id": 1,
+      "deviceId": "watch-001",
+      "date": "2025-06-09",
+      "weekday": "Montag",
+      "stepsTotal": 8742,
+      "goal": 10000
+    },
+    {
+      "id": 2,
+      "deviceId": "watch-001",
+      "date": "2025-06-10",
+      "weekday": "Dienstag",
+      "stepsTotal": 11205,
+      "goal": 10000
+    },
+    {
+      "id": 3,
+      "deviceId": "watch-001",
+      "date": "2025-06-11",
+      "weekday": "Mittwoch",
+      "stepsTotal": 6530,
+      "goal": 10000
+    },
+    {
+      "id": 4,
+      "deviceId": "watch-001",
+      "date": "2025-06-12",
+      "weekday": "Donnerstag",
+      "stepsTotal": 9870,
+      "goal": 10000
+    },
+    {
+      "id": 5,
+      "deviceId": "watch-001",
+      "date": "2025-06-13",
+      "weekday": "Freitag",
+      "stepsTotal": 7450,
+      "goal": 10000
+    },
+    {
+      "id": 6,
+      "deviceId": "watch-001",
+      "date": "2025-06-14",
+      "weekday": "Samstag",
+      "stepsTotal": 12380,
+      "goal": 10000
+    },
+    {
+      "id": 7,
+      "deviceId": "watch-001",
+      "date": "2025-06-15",
+      "weekday": "Sonntag",
+      "stepsTotal": 4210,
+      "goal": 10000
+    }
+  ],
+  "calories": [
+    {
+      "id": 1,
+      "deviceId": "watch-001",
+      "date": "2025-06-09",
+      "weekday": "Montag",
+      "activeKcal": 312,
+      "totalKcal": 2150
+    },
+    {
+      "id": 2,
+      "deviceId": "watch-001",
+      "date": "2025-06-10",
+      "weekday": "Dienstag",
+      "activeKcal": 425,
+      "totalKcal": 2280
+    },
+    {
+      "id": 3,
+      "deviceId": "watch-001",
+      "date": "2025-06-11",
+      "weekday": "Mittwoch",
+      "activeKcal": 198,
+      "totalKcal": 2020
+    },
+    {
+      "id": 4,
+      "deviceId": "watch-001",
+      "date": "2025-06-12",
+      "weekday": "Donnerstag",
+      "activeKcal": 380,
+      "totalKcal": 2210
+    },
+    {
+      "id": 5,
+      "deviceId": "watch-001",
+      "date": "2025-06-13",
+      "weekday": "Freitag",
+      "activeKcal": 265,
+      "totalKcal": 2090
+    },
+    {
+      "id": 6,
+      "deviceId": "watch-001",
+      "date": "2025-06-14",
+      "weekday": "Samstag",
+      "activeKcal": 510,
+      "totalKcal": 2410
+    },
+    {
+      "id": 7,
+      "deviceId": "watch-001",
+      "date": "2025-06-15",
+      "weekday": "Sonntag",
+      "activeKcal": 145,
+      "totalKcal": 1920
+    }
+  ],
+  "distance": [
+    {
+      "id": 1,
+      "deviceId": "watch-001",
+      "date": "2025-06-09",
+      "weekday": "Montag",
+      "distanceKm": 6.12
+    },
+    {
+      "id": 2,
+      "deviceId": "watch-001",
+      "date": "2025-06-10",
+      "weekday": "Dienstag",
+      "distanceKm": 7.85
+    },
+    {
+      "id": 3,
+      "deviceId": "watch-001",
+      "date": "2025-06-11",
+      "weekday": "Mittwoch",
+      "distanceKm": 4.57
+    },
+    {
+      "id": 4,
+      "deviceId": "watch-001",
+      "date": "2025-06-12",
+      "weekday": "Donnerstag",
+      "distanceKm": 6.91
+    },
+    {
+      "id": 5,
+      "deviceId": "watch-001",
+      "date": "2025-06-13",
+      "weekday": "Freitag",
+      "distanceKm": 5.22
+    },
+    {
+      "id": 6,
+      "deviceId": "watch-001",
+      "date": "2025-06-14",
+      "weekday": "Samstag",
+      "distanceKm": 8.67
+    },
+    {
+      "id": 7,
+      "deviceId": "watch-001",
+      "date": "2025-06-15",
+      "weekday": "Sonntag",
+      "distanceKm": 2.95
+    }
+  ],
+  "sensorReadings": [
+    {
+      "id": 1,
+      "deviceId": "watch-001",
+      "timestamp": "2025-06-15T22:00:00Z",
+      "accelX": 0.02,
+      "accelY": -0.01,
+      "accelZ": 9.78,
+      "tiltDeg": 1.2,
+      "orientation": "flach"
+    },
+    {
+      "id": 2,
+      "deviceId": "watch-001",
+      "timestamp": "2025-06-15T22:05:00Z",
+      "accelX": 0.85,
+      "accelY": -0.32,
+      "accelZ": 9.65,
+      "tiltDeg": 5.8,
+      "orientation": "leicht geneigt"
+    },
+    {
+      "id": 3,
+      "deviceId": "watch-001",
+      "timestamp": "2025-06-15T22:10:00Z",
+      "accelX": 3.21,
+      "accelY": 1.45,
+      "accelZ": 8.92,
+      "tiltDeg": 22.4,
+      "orientation": "geneigt"
+    },
+    {
+      "id": 4,
+      "deviceId": "watch-001",
+      "timestamp": "2025-06-15T22:15:00Z",
+      "accelX": 6.94,
+      "accelY": -0.78,
+      "accelZ": 6.85,
+      "tiltDeg": 45.1,
+      "orientation": "stark geneigt"
+    },
+    {
+      "id": 5,
+      "deviceId": "watch-001",
+      "timestamp": "2025-06-15T22:20:00Z",
+      "accelX": 0.05,
+      "accelY": 0.03,
+      "accelZ": 9.81,
+      "tiltDeg": 0.4,
+      "orientation": "flach"
+    }
+  ]
+}
