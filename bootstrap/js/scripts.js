@@ -164,12 +164,26 @@ window.addEventListener("DOMContentLoaded", (event) => {
   }
 })();
 
-/* --- Gerätedaten: WebSocket (WLAN) + WebUSB (USB) + Simulation --- */
+/* --- Gerätedaten: WebSocket/WebUSB + Verlauf (localStorage) --- */
 (function () {
+  const STORAGE_KEY = 'sleep-help-device-history';
+  const CONFIG_URL = 'json/config.json';
   let ws = null;
   let usbDevice = null;
   let simTimer = null;
-  let deviceConnected = false; // true wenn echte Verbindung aktiv
+  let deviceConnected = false;
+  let maxEntries = 500;
+
+  // lade maxEntries aus config.json falls verfügbar
+  (async function loadConfig(){
+    try {
+      const res = await fetch(CONFIG_URL, { cache: "no-store" });
+      if (res.ok) {
+        const cfg = await res.json();
+        maxEntries = (cfg?.deviceHistory?.maxEntries) || maxEntries;
+      }
+    } catch(e){ /* ignore */ }
+  })();
 
   function setStatus(text, ok = true) {
     const el = document.getElementById('device-status');
@@ -178,16 +192,93 @@ window.addEventListener("DOMContentLoaded", (event) => {
   }
 
   function clearDeviceUI() {
-    const el = id => document.getElementById(id);
-    if (el('device-temp')) el('device-temp').textContent = '— °C';
-    if (el('device-pulse')) el('device-pulse').textContent = '— bpm';
-    if (el('device-hum')) el('device-hum').textContent = '— %';
-    if (el('device-batt')) el('device-batt').textContent = '— %';
-    if (el('device-ts')) el('device-ts').textContent = '—';
+    ['device-temp','device-pulse','device-hum','device-batt','device-ts'].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (id === 'device-ts') el.textContent = '—';
+      else if (id === 'device-temp') el.textContent = '— °C';
+      else if (id === 'device-pulse') el.textContent = '— bpm';
+      else if (id === 'device-hum') el.textContent = '— %';
+      else if (id === 'device-batt') el.textContent = '— %';
+    });
+  }
+
+  function loadHistory() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return [];
+      return JSON.parse(raw);
+    } catch (e) { return []; }
+  }
+  function saveHistory(arr) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+    } catch (e) { console.error(e); }
+  }
+
+  function pushMeasurement(rec) {
+    // rec sollte { temp, pulse, hum, batt, ts }
+    if (!rec || typeof rec !== 'object') return;
+    const
+    hist = loadHistory();
+    hist.unshift(rec); // neu oben
+    if (hist.length > maxEntries) hist.length = maxEntries;
+    saveHistory(hist);
+    renderHistory();
+  }
+
+  function renderHistory() {
+    const body = document.getElementById('device-history-body');
+    const countEl = document.getElementById('device-history-count');
+    if (!body || !countEl) return;
+    const hist = loadHistory();
+    body.innerHTML = '';
+    hist.slice(0, 200).forEach(item => {
+      const tr = document.createElement('tr');
+      const ts = item.ts ? new Date(item.ts).toLocaleString() : '-';
+      tr.innerHTML = `<td class="align-middle small">${ts}</td>
+                      <td class="align-middle">${item.temp!=null?item.temp.toFixed(1)+' °C':'—'}</td>
+                      <td class="align-middle">${item.pulse!=null?Math.round(item.pulse)+' bpm':'—'}</td>
+                      <td class="align-middle">${item.hum!=null?Math.round(item.hum)+' %':'—'}</td>
+                      <td class="align-middle">${item.batt!=null?Math.round(item.batt)+' %':'—'}</td>`;
+      body.appendChild(tr);
+    });
+    countEl.textContent = `Verlauf: ${hist.length}`;
+  }
+
+  function exportHistory() {
+    const hist = loadHistory();
+    const blob = new Blob([JSON.stringify({ exportedAt: Date.now(), history: hist }, null, 2)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `sleep-help-history-${new Date().toISOString().slice(0,19).replace(/[:T]/g,'-')}.json`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+
+  function importHistoryFile(file) {
+    if (!file) return;
+    const fr = new FileReader();
+    fr.onload = () => {
+      try {
+        const data = JSON.parse(fr.result);
+        const hist = Array.isArray(data) ? data : (Array.isArray(data.history) ? data.history : null);
+        if (!hist) { setStatus('Import: ungültiges Format', false); return; }
+        // einfacher Validierungsfilter
+        const valid = hist.filter(h => h && h.ts);
+        saveHistory(valid.slice(0, maxEntries));
+        renderHistory();
+        setStatus('Import erfolgreich');
+      } catch (e) {
+        console.error(e);
+        setStatus('Import fehlgeschlagen', false);
+      }
+    };
+    fr.readAsText(file);
   }
 
   function updateUI(data) {
-    // nur aktualisieren, wenn echtes Gerät verbunden
     if (!deviceConnected) return;
     if (!data) return;
     if (data.temp != null && document.getElementById('device-temp')) document.getElementById('device-temp').textContent = `${data.temp.toFixed(1)} °C`;
@@ -195,9 +286,20 @@ window.addEventListener("DOMContentLoaded", (event) => {
     if (data.hum != null && document.getElementById('device-hum')) document.getElementById('device-hum').textContent = `${Math.round(data.hum)} %`;
     if (data.batt != null && document.getElementById('device-batt')) document.getElementById('device-batt').textContent = `${Math.round(data.batt)} %`;
     if (data.ts && document.getElementById('device-ts')) document.getElementById('device-ts').textContent = new Date(data.ts).toLocaleString();
+
+    // Verlauf speichern (nur wenn verbunden)
+    if (deviceConnected) {
+      pushMeasurement({
+        temp: data.temp != null ? Number(data.temp) : null,
+        pulse: data.pulse != null ? Number(data.pulse) : null,
+        hum: data.hum != null ? Number(data.hum) : null,
+        batt: data.batt != null ? Number(data.batt) : null,
+        ts: data.ts || Date.now()
+      });
+    }
   }
 
-  // WebSocket Verbindung (für WLAN-Uhr / Device)
+  /* WebSocket / WebUSB / Simulation (wie zuvor) */
   async function connectWebSocket(url) {
     try {
       if (ws) { ws.close(); ws = null; deviceConnected = false; }
@@ -206,6 +308,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       ws.addEventListener('open', () => {
         deviceConnected = true;
         setStatus('verbunden');
+        renderHistory();
       });
       ws.addEventListener('message', (ev) => {
         try {
@@ -231,7 +334,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
     }
   }
 
-  // WebUSB Beispiel (Browser-Unterstützung erforderlich)
   async function connectUSB() {
     if (!navigator.usb) {
       setStatus('WebUSB nicht verfügbar im Browser', false);
@@ -239,14 +341,12 @@ window.addEventListener("DOMContentLoaded", (event) => {
     }
     try {
       setStatus('USB: Gerät wählen...');
-      usbDevice = await navigator.usb.requestDevice({ filters: [] }); // filter anpassen
+      usbDevice = await navigator.usb.requestDevice({ filters: [] });
       await usbDevice.open();
       if (usbDevice.configuration === null) await usbDevice.selectConfiguration(1);
-      // Interface/Endpoint hier anpassen je nach Gerät
-      // Beispiel: await usbDevice.claimInterface(0);
       deviceConnected = true;
       setStatus(`USB: verbunden (${usbDevice.productName || usbDevice.vendorId})`);
-      // Lese-/Schreibrate implementieren je nach Gerät; hier nur Platzhalter
+      renderHistory();
     } catch (e) {
       console.error(e);
       deviceConnected = false;
@@ -255,13 +355,12 @@ window.addEventListener("DOMContentLoaded", (event) => {
     }
   }
 
-  // Simulation: nur erlaubt wenn echtes Gerät verbunden ist
   function startSimulation() {
-    if (!deviceConnected) {
+    if (!deviceConnected) { 
       setStatus('Simulation nur möglich, wenn eine Uhr verbunden ist', false);
       return;
     }
-    stopSimulation(); // sicherstellen, dass kein Timer doppelt läuft
+    stopSimulation();
     setStatus('Simulation läuft');
     simTimer = setInterval(() => {
       const now = Date.now();
@@ -277,7 +376,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
   function stopSimulation() {
     if (simTimer) { clearInterval(simTimer); simTimer = null; }
     setStatus('Simulation gestoppt');
-    // NICHT deviceConnected auf false setzen oder UI leeren — echte Verbindung bleibt bestehen
   }
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -286,18 +384,28 @@ window.addEventListener("DOMContentLoaded", (event) => {
       if (!url) { setStatus('Bitte WebSocket-URL eingeben', false); return; }
       connectWebSocket(url);
     });
-    document.getElementById('device-usb-connect')?.addEventListener('click', () => {
-      connectUSB();
-    });
+    document.getElementById('device-usb-connect')?.addEventListener('click', () => connectUSB());
     document.getElementById('device-simulate')?.addEventListener('click', () => {
-      if (!deviceConnected) {
-        setStatus('Bitte zuerst Uhr verbinden (WLAN oder USB)', false);
-        return;
-      }
-      if (simTimer) { stopSimulation(); } else startSimulation();
+      if (!deviceConnected) { setStatus('Bitte zuerst Uhr verbinden (WLAN oder USB)', false); return; }
+      if (simTimer) stopSimulation(); else startSimulation();
     });
 
-    // sauber schließen beim Tabwechsel / Seite verlassen
+    // Export / Import / Clear / Render initial
+    document.getElementById('device-export')?.addEventListener('click', exportHistory);
+    document.getElementById('device-import-btn')?.addEventListener('click', () => document.getElementById('device-import-file')?.click());
+    document.getElementById('device-import-file')?.addEventListener('change', (e) => {
+      const f = e.target.files && e.target.files[0];
+      if (f) importHistoryFile(f);
+      e.target.value = '';
+    });
+    document.getElementById('device-history-clear')?.addEventListener('click', () => {
+      localStorage.removeItem(STORAGE_KEY);
+      renderHistory();
+      setStatus('Verlauf gelöscht');
+      clearDeviceUI();
+    });
+
+    renderHistory();
     window.addEventListener('beforeunload', () => { if (ws) ws.close(); stopSimulation(); });
   });
 })();

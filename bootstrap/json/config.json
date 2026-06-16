@@ -1,0 +1,9 @@
+{
+  "project": "Sleep-Help",
+  "version": "1.0",
+  "description": "Konfigurations-/Template-Datei. Wird vom Frontend nicht automatisch überschrieben.",
+  "deviceHistory": {
+    "maxEntries": 500,
+    "note": "Messungen werden lokal im Browser (localStorage) gespeichert. Export/Import funktioniert über die UI."
+  }
+}
