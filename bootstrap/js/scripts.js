@@ -168,6 +168,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 (function () {
   const STORAGE_KEY = 'sleep-help-device-history';
   const CONFIG_URL = 'json/config.json';
+  const API_BASE = 'http://localhost:3000/api';
   let ws = null;
   let usbDevice = null;
   let simTimer = null;
@@ -189,6 +190,41 @@ window.addEventListener("DOMContentLoaded", (event) => {
     const el = document.getElementById('device-status');
     if (el) el.textContent = `Status: ${text}`;
     if (ok) el?.classList.remove('text-danger'); else el?.classList.add('text-danger');
+  }
+
+  async function fetchBackendTips() {
+    const statusEl = document.getElementById('backend-status');
+    const container = document.getElementById('backend-tips');
+    if (statusEl) statusEl.textContent = 'Lade Tipps vom Backend...';
+    if (!container) return;
+    try {
+      const res = await fetch(`${API_BASE}/tips`, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const tips = await res.json();
+      if (!Array.isArray(tips)) throw new Error('Ungültiges Antwortformat');
+      renderBackendTips(tips);
+      if (statusEl) statusEl.textContent = `Geladen: ${tips.length} Tipps vom Backend.`;
+    } catch (err) {
+      console.error('Backend-Fetch fehlgeschlagen', err);
+      if (statusEl) statusEl.textContent = 'Backend-Fetch fehlgeschlagen. Prüfe json-server.';
+      container.innerHTML = '<p class="text-danger">Konnte Backend-Tipps nicht laden.</p>';
+    }
+  }
+
+  function renderBackendTips(tips) {
+    const container = document.getElementById('backend-tips');
+    if (!container) return;
+    if (!tips.length) {
+      container.innerHTML = '<p>Keine Tipps verfügbar.</p>';
+      return;
+    }
+    container.innerHTML = tips.slice(0, 6).map(t => `
+      <div class="mb-3">
+        <strong>${t.title || 'Tipp'}</strong>
+        <p class="mb-1">${t.description || ''}</p>
+        <small class="text-muted">${t.category || ''} · Priorität: ${t.priority || '-'}</small>
+      </div>
+    `).join('');
   }
 
   function clearDeviceUI() {
@@ -404,6 +440,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       setStatus('Verlauf gelöscht');
       clearDeviceUI();
     });
+    document.getElementById('backend-load-tips')?.addEventListener('click', fetchBackendTips);
 
     renderHistory();
     window.addEventListener('beforeunload', () => { if (ws) ws.close(); stopSimulation(); });
