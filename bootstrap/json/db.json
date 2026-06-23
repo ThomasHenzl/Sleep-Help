@@ -133,7 +133,7 @@
       "timestamp": "2025-06-15T23:30:00Z",
       "temp": 21.3,
       "pulse": 62,
-      "humidity": 45,
+      "sleepTime": 7.4,
       "battery": 78
     },
     {
@@ -142,7 +142,7 @@
       "timestamp": "2025-06-16T02:15:00Z",
       "temp": 19.8,
       "pulse": 55,
-      "humidity": 48,
+      "sleepTime": 8.0,
       "battery": 72
     },
     {
@@ -150,7 +150,7 @@
       "timestamp": "2026-06-23T08:32:56.816Z",
       "temp": 18,
       "pulse": 88,
-      "humidity": 52,
+      "sleepTime": 8.2,
       "battery": 83,
       "id": 3
     },
@@ -159,7 +159,7 @@
       "timestamp": "2026-06-23T08:33:07.134Z",
       "temp": 19.7,
       "pulse": 67,
-      "humidity": 53,
+      "sleepTime": 7.7,
       "battery": 51,
       "id": 4
     },
@@ -168,7 +168,7 @@
       "timestamp": "2026-06-23T08:33:27.413Z",
       "temp": 23.3,
       "pulse": 90,
-      "humidity": 45,
+      "sleepTime": 7.1,
       "battery": 41,
       "id": 5
     },
@@ -177,7 +177,7 @@
       "timestamp": "2026-06-23T08:33:37.051Z",
       "temp": 19.6,
       "pulse": 56,
-      "humidity": 49,
+      "sleepTime": 7.9,
       "battery": 53,
       "id": 6
     },
@@ -186,7 +186,7 @@
       "timestamp": "2026-06-23T08:36:09.310Z",
       "temp": 22.3,
       "pulse": 66,
-      "humidity": 41,
+      "sleepTime": 6.8,
       "battery": 94,
       "id": 7
     },

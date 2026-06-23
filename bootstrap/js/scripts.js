@@ -279,13 +279,13 @@ window.addEventListener("DOMContentLoaded", (event) => {
   }
 
   function clearDeviceUI() {
-    ['device-temp','device-pulse','device-hum','device-batt','device-ts'].forEach(id => {
+    ['device-temp','device-pulse','device-sleeptime','device-batt','device-ts'].forEach(id => {
       const el = document.getElementById(id);
       if (!el) return;
       if (id === 'device-ts') el.textContent = '—';
       else if (id === 'device-temp') el.textContent = '— °C';
       else if (id === 'device-pulse') el.textContent = '— bpm';
-      else if (id === 'device-hum') el.textContent = '— h';
+      else if (id === 'device-sleeptime') el.textContent = '— h';
       else if (id === 'device-batt') el.textContent = '— %';
     });
   }
@@ -304,7 +304,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   }
 
   function pushMeasurement(rec) {
-    // rec sollte { temp, pulse, hum, batt, ts }
+    // rec sollte { temp, pulse, sleepTime, batt, ts } sein
     if (!rec || typeof rec !== 'object') return;
     const
     hist = loadHistory();
@@ -323,10 +323,11 @@ window.addEventListener("DOMContentLoaded", (event) => {
     hist.slice(0, 200).forEach(item => {
       const tr = document.createElement('tr');
       const ts = item.ts ? new Date(item.ts).toLocaleString() : '-';
+      const sleepVal = item.sleepTime != null ? item.sleepTime : item.hum;
       tr.innerHTML = `<td class="align-middle small">${ts}</td>
                       <td class="align-middle">${item.temp!=null?item.temp.toFixed(1)+' °C':'—'}</td>
                       <td class="align-middle">${item.pulse!=null?Math.round(item.pulse)+' bpm':'—'}</td>
-                      <td class="align-middle">${item.hum!=null?formatSleepDuration(item.hum):'—'}</td>
+                      <td class="align-middle">${sleepVal!=null?formatSleepDuration(sleepVal):'—'}</td>
                       <td class="align-middle">${item.batt!=null?Math.round(item.batt)+' %':'—'}</td>`;
       body.appendChild(tr);
     });
@@ -377,7 +378,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
     if (!data) return;
     if (data.temp != null && document.getElementById('device-temp')) document.getElementById('device-temp').textContent = `${data.temp.toFixed(1)} °C`;
     if (data.pulse != null && document.getElementById('device-pulse')) document.getElementById('device-pulse').textContent = `${Math.round(data.pulse)} bpm`;
-    if (data.hum != null && document.getElementById('device-hum')) document.getElementById('device-hum').textContent = formatSleepDuration(data.hum);
+    const sleepDuration = data.sleepTime != null ? data.sleepTime : data.hum;
+    if (sleepDuration != null && document.getElementById('device-sleeptime')) document.getElementById('device-sleeptime').textContent = formatSleepDuration(sleepDuration);
     if (data.batt != null && document.getElementById('device-batt')) document.getElementById('device-batt').textContent = `${Math.round(data.batt)} %`;
     if (data.ts && document.getElementById('device-ts')) document.getElementById('device-ts').textContent = new Date(data.ts).toLocaleString();
 
@@ -386,7 +388,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       pushMeasurement({
         temp: data.temp != null ? Number(data.temp) : null,
         pulse: data.pulse != null ? Number(data.pulse) : null,
-        hum: data.hum != null ? Number(data.hum) : null,
+        sleepTime: sleepDuration != null ? Number(sleepDuration) : null,
         batt: data.batt != null ? Number(data.batt) : null,
         ts: data.ts || Date.now()
       });
@@ -462,7 +464,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       updateUI({
         temp: 18 + Math.random() * 6,
         pulse: 55 + Math.random() * 40,
-        hum: 35 + Math.random() * 30,
+        sleepTime: 5 + Math.random() * 4,
         batt: 40 + Math.random() * 60,
         ts: now
       });
@@ -487,7 +489,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       updateUI({
         temp: reading.temp,
         pulse: reading.pulse,
-        hum: reading.sleepTime,
+        sleepTime: reading.sleepTime,
         batt: reading.battery,
         ts: reading.timestamp
       }, true);
