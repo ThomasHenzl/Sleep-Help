@@ -61,7 +61,7 @@
     {
       "id": 1,
       "userId": "user-001",
-      "date": "2025-06-15",
+      "date": "2025-06-15", n ,
       "sleepHours": 7.5,
       "fallAsleep": "leicht",
       "noiseLight": "kaum",
