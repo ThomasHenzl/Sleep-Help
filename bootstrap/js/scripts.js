@@ -172,6 +172,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   let ws = null;
   let usbDevice = null;
   let simTimer = null;
+  let backendSimTimer = null;
   let deviceConnected = false;
   let maxEntries = 500;
 
@@ -190,6 +191,56 @@ window.addEventListener("DOMContentLoaded", (event) => {
     const el = document.getElementById('device-status');
     if (el) el.textContent = `Status: ${text}`;
     if (ok) el?.classList.remove('text-danger'); else el?.classList.add('text-danger');
+  }
+
+  async function saveDeviceReadingBackend(payload) {
+    try {
+      const res = await fetch(`${API_BASE}/deviceReadings`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return await res.json();
+    } catch (err) {
+      console.error('Backend-Schreibzugriff fehlgeschlagen', err);
+      setStatus('Backend-Speichern fehlgeschlagen', false);
+      return null;
+    }
+  }
+
+  async function loadBackendDeviceHistory() {
+    const statusEl = document.getElementById('device-status');
+    if (statusEl) statusEl.textContent = 'Lade Backend-Verlauf...';
+    try {
+      const res = await fetch(`${API_BASE}/deviceReadings?_sort=timestamp&_order=desc`, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      renderDeviceHistory(data);
+      if (statusEl) statusEl.textContent = `Backend-Verlauf geladen (${data.length} Einträge)`;
+    } catch (err) {
+      console.error('Backend-Laden fehlgeschlagen', err);
+      if (statusEl) statusEl.textContent = 'Backend-Verlauf laden fehlgeschlagen';
+    }
+  }
+
+  function renderDeviceHistory(items) {
+    const body = document.getElementById('device-history-body');
+    const countEl = document.getElementById('device-history-count');
+    if (!body || !countEl) return;
+    body.innerHTML = '';
+    (Array.isArray(items) ? items : []).slice(0, 200).forEach(item => {
+      const tr = document.createElement('tr');
+      const ts = item.timestamp ? new Date(item.timestamp).toLocaleString() : (item.ts ? new Date(item.ts).toLocaleString() : '-');
+      const sleepValue = item.sleepTime != null ? item.sleepTime : item.hum;
+      tr.innerHTML = `<td class="align-middle small">${ts}</td>
+                      <td class="align-middle">${item.temp!=null?Number(item.temp).toFixed(1)+' °C':'—'}</td>
+                      <td class="align-middle">${item.pulse!=null?Math.round(item.pulse)+' bpm':'—'}</td>
+                      <td class="align-middle">${sleepValue!=null?formatSleepDuration(sleepValue):'—'}</td>
+                      <td class="align-middle">${item.battery!=null?Math.round(item.battery)+' %':'—'}</td>`;
+      body.appendChild(tr);
+    });
+    countEl.textContent = `Verlauf: ${items ? items.length : 0}`;
   }
 
   async function fetchBackendTips() {
@@ -234,7 +285,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       if (id === 'device-ts') el.textContent = '—';
       else if (id === 'device-temp') el.textContent = '— °C';
       else if (id === 'device-pulse') el.textContent = '— bpm';
-      else if (id === 'device-hum') el.textContent = '— %';
+      else if (id === 'device-hum') el.textContent = '— h';
       else if (id === 'device-batt') el.textContent = '— %';
     });
   }
@@ -275,7 +326,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       tr.innerHTML = `<td class="align-middle small">${ts}</td>
                       <td class="align-middle">${item.temp!=null?item.temp.toFixed(1)+' °C':'—'}</td>
                       <td class="align-middle">${item.pulse!=null?Math.round(item.pulse)+' bpm':'—'}</td>
-                      <td class="align-middle">${item.hum!=null?Math.round(item.hum)+' %':'—'}</td>
+                      <td class="align-middle">${item.hum!=null?formatSleepDuration(item.hum):'—'}</td>
                       <td class="align-middle">${item.batt!=null?Math.round(item.batt)+' %':'—'}</td>`;
       body.appendChild(tr);
     });
@@ -314,17 +365,24 @@ window.addEventListener("DOMContentLoaded", (event) => {
     fr.readAsText(file);
   }
 
-  function updateUI(data) {
-    if (!deviceConnected) return;
+  function formatSleepDuration(hours) {
+    const totalMinutes = Math.round(Number(hours) * 60);
+    const h = Math.floor(totalMinutes / 60);
+    const m = totalMinutes % 60;
+    return `${h}h ${m.toString().padStart(2, '0')}m`;
+  }
+
+  function updateUI(data, allowWithoutConnection = false) {
+    if (!deviceConnected && !allowWithoutConnection) return;
     if (!data) return;
     if (data.temp != null && document.getElementById('device-temp')) document.getElementById('device-temp').textContent = `${data.temp.toFixed(1)} °C`;
     if (data.pulse != null && document.getElementById('device-pulse')) document.getElementById('device-pulse').textContent = `${Math.round(data.pulse)} bpm`;
-    if (data.hum != null && document.getElementById('device-hum')) document.getElementById('device-hum').textContent = `${Math.round(data.hum)} %`;
+    if (data.hum != null && document.getElementById('device-hum')) document.getElementById('device-hum').textContent = formatSleepDuration(data.hum);
     if (data.batt != null && document.getElementById('device-batt')) document.getElementById('device-batt').textContent = `${Math.round(data.batt)} %`;
     if (data.ts && document.getElementById('device-ts')) document.getElementById('device-ts').textContent = new Date(data.ts).toLocaleString();
 
     // Verlauf speichern (nur wenn verbunden)
-    if (deviceConnected) {
+    if (deviceConnected || allowWithoutConnection) {
       pushMeasurement({
         temp: data.temp != null ? Number(data.temp) : null,
         pulse: data.pulse != null ? Number(data.pulse) : null,
@@ -397,6 +455,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       return;
     }
     stopSimulation();
+    stopBackendSimulation();
     setStatus('Simulation läuft');
     simTimer = setInterval(() => {
       const now = Date.now();
@@ -409,6 +468,42 @@ window.addEventListener("DOMContentLoaded", (event) => {
       });
     }, 1500);
   }
+
+  async function startBackendSimulation() {
+    if (backendSimTimer) {
+      setStatus('Backend-Simulation läuft bereits');
+      return;
+    }
+    stopSimulation();
+    backendSimTimer = setInterval(async () => {
+      const reading = {
+        deviceId: 'sim-001',
+        timestamp: new Date().toISOString(),
+        temp: Number((18 + Math.random() * 6).toFixed(1)),
+        pulse: Math.round(55 + Math.random() * 40),
+        sleepTime: Number((5 + Math.random() * 4).toFixed(1)),
+        battery: Math.round(40 + Math.random() * 60)
+      };
+      updateUI({
+        temp: reading.temp,
+        pulse: reading.pulse,
+        hum: reading.sleepTime,
+        batt: reading.battery,
+        ts: reading.timestamp
+      }, true);
+      await saveDeviceReadingBackend(reading);
+    }, 1500);
+    setStatus('Backend-Simulation läuft');
+  }
+
+  function stopBackendSimulation() {
+    if (backendSimTimer) {
+      clearInterval(backendSimTimer);
+      backendSimTimer = null;
+      setStatus('Backend-Simulation gestoppt');
+    }
+  }
+
   function stopSimulation() {
     if (simTimer) { clearInterval(simTimer); simTimer = null; }
     setStatus('Simulation gestoppt');
@@ -421,10 +516,10 @@ window.addEventListener("DOMContentLoaded", (event) => {
       connectWebSocket(url);
     });
     document.getElementById('device-usb-connect')?.addEventListener('click', () => connectUSB());
-    document.getElementById('device-simulate')?.addEventListener('click', () => {
-      if (!deviceConnected) { setStatus('Bitte zuerst Uhr verbinden (WLAN oder USB)', false); return; }
-      if (simTimer) stopSimulation(); else startSimulation();
+    document.getElementById('device-backend-simulate')?.addEventListener('click', () => {
+      if (backendSimTimer) stopBackendSimulation(); else startBackendSimulation();
     });
+    document.getElementById('device-backend-load')?.addEventListener('click', loadBackendDeviceHistory);
 
     // Export / Import / Clear / Render initial
     document.getElementById('device-export')?.addEventListener('click', exportHistory);
@@ -443,6 +538,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
     document.getElementById('backend-load-tips')?.addEventListener('click', fetchBackendTips);
 
     renderHistory();
-    window.addEventListener('beforeunload', () => { if (ws) ws.close(); stopSimulation(); });
+    window.addEventListener('beforeunload', () => { if (ws) ws.close(); stopSimulation(); stopBackendSimulation(); });
   });
 })();

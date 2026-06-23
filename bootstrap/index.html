@@ -586,7 +586,8 @@
                   <input id="device-ws-url" class="form-control form-control-sm" placeholder="ws://192.168.x.x:8080" style="max-width:360px" />
                   <button id="device-ws-connect" class="btn btn-sm btn-primary">Mit WLAN verbinden</button>
                   <button id="device-usb-connect" class="btn btn-sm btn-outline-secondary">Per USB verbinden</button>
-                  <button id="device-simulate" class="btn btn-sm btn-outline-info">Simuliere Daten</button>
+                  <button id="device-backend-simulate" class="btn btn-sm btn-outline-success">Backend-Simulation</button>
+                  <button id="device-backend-load" class="btn btn-sm btn-outline-primary">Backend-Verlauf laden</button>
                 </div>
                 <div id="device-status" class="mb-3 small-muted">Status: nicht verbunden</div>
 
@@ -605,8 +606,8 @@
                   </div>
                   <div class="col-md-4 mb-2">
                     <div class="result-box">
-                      <strong>Luftfeuchte</strong>
-                      <div id="device-hum" class="fs-4">— %</div>
+                      <strong>Schlafzeit</strong>
+                      <div id="device-hum" class="fs-4">— h</div>
                     </div>
                   </div>
                 </div>
@@ -633,7 +634,7 @@
                   <div class="result-box" style="max-height:280px; overflow:auto">
                     <table class="table table-sm mb-0">
                       <thead>
-                        <tr><th>Zeit</th><th>Temp</th><th>Puls</th><th>Feuchte</th><th>Akku</th></tr>
+                        <tr><th>Zeit</th><th>Temp</th><th>Puls</th><th>Schlafzeit</th><th>Akku</th></tr>
                       </thead>
                       <tbody id="device-history-body">
                         <!-- wird dynamisch gefüllt -->

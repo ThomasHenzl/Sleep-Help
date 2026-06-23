@@ -61,7 +61,7 @@
     {
       "id": 1,
       "userId": "user-001",
-      "date": "2025-06-15", n ,
+      "date": "2025-06-15",
       "sleepHours": 7.5,
       "fallAsleep": "leicht",
       "noiseLight": "kaum",
@@ -144,6 +144,141 @@
       "pulse": 55,
       "humidity": 48,
       "battery": 72
+    },
+    {
+      "deviceId": "sim-001",
+      "timestamp": "2026-06-23T08:32:56.816Z",
+      "temp": 18,
+      "pulse": 88,
+      "humidity": 52,
+      "battery": 83,
+      "id": 3
+    },
+    {
+      "deviceId": "sim-001",
+      "timestamp": "2026-06-23T08:33:07.134Z",
+      "temp": 19.7,
+      "pulse": 67,
+      "humidity": 53,
+      "battery": 51,
+      "id": 4
+    },
+    {
+      "deviceId": "sim-001",
+      "timestamp": "2026-06-23T08:33:27.413Z",
+      "temp": 23.3,
+      "pulse": 90,
+      "humidity": 45,
+      "battery": 41,
+      "id": 5
+    },
+    {
+      "deviceId": "sim-001",
+      "timestamp": "2026-06-23T08:33:37.051Z",
+      "temp": 19.6,
+      "pulse": 56,
+      "humidity": 49,
+      "battery": 53,
+      "id": 6
+    },
+    {
+      "deviceId": "sim-001",
+      "timestamp": "2026-06-23T08:36:09.310Z",
+      "temp": 22.3,
+      "pulse": 66,
+      "humidity": 41,
+      "battery": 94,
+      "id": 7
+    },
+    {
+      "deviceId": "sim-001",
+      "timestamp": "2026-06-23T08:37:00.347Z",
+      "temp": 19.1,
+      "pulse": 73,
+      "sleepTime": 8.1,
+      "battery": 46,
+      "id": 8
+    },
+    {
+      "deviceId": "sim-001",
+      "timestamp": "2026-06-23T08:38:21.389Z",
+      "temp": 19.3,
+      "pulse": 69,
+      "sleepTime": 8.9,
+      "battery": 74,
+      "id": 9
+    },
+    {
+      "deviceId": "sim-001",
+      "timestamp": "2026-06-23T08:39:30.372Z",
+      "temp": 22.8,
+      "pulse": 90,
+      "sleepTime": 8.5,
+      "battery": 68,
+      "id": 10
+    },
+    {
+      "deviceId": "sim-001",
+      "timestamp": "2026-06-23T08:41:13.279Z",
+      "temp": 21.7,
+      "pulse": 79,
+      "sleepTime": 5.2,
+      "battery": 78,
+      "id": 11
+    },
+    {
+      "deviceId": "sim-001",
+      "timestamp": "2026-06-23T08:41:28.730Z",
+      "temp": 19.5,
+      "pulse": 93,
+      "sleepTime": 6.3,
+      "battery": 49,
+      "id": 12
+    },
+    {
+      "deviceId": "sim-001",
+      "timestamp": "2026-06-23T08:41:57.182Z",
+      "temp": 21.8,
+      "pulse": 72,
+      "sleepTime": 8.4,
+      "battery": 82,
+      "id": 13
+    },
+    {
+      "deviceId": "sim-001",
+      "timestamp": "2026-06-23T08:42:09.055Z",
+      "temp": 19.5,
+      "pulse": 89,
+      "sleepTime": 6.3,
+      "battery": 95,
+      "id": 14
+    },
+    {
+      "deviceId": "sim-001",
+      "timestamp": "2026-06-23T08:44:09.571Z",
+      "temp": 18.6,
+      "pulse": 56,
+      "sleepTime": 7.4,
+      "battery": 77,
+      "id": 15
+    },
+    {
+      "deviceId": "sim-001",
+      "timestamp": "2026-06-23T08:46:03.771Z",
+      "temp": 19.2,
+      "pulse": 90,
+      "sleepTime": 6.6,
+      "battery": 84,
+      "id": 16
+    },
+    {
+      "deviceId": "sim-001",
+      "timestamp": "2026-06-23T08:46:10.368Z",
+      "temp": 18.4,
+      "pulse": 69,
+      "sleepTime": 8.9,
+      "battery": 47,
+      "id": 17
     }
   ],
   "steps": [
@@ -403,10 +538,22 @@
       "end": "2025-06-16T06:45:00Z",
       "totalMinutes": 465,
       "sleepStages": [
-        { "stage": "awake", "minutes": 20 },
-        { "stage": "light", "minutes": 230 },
-        { "stage": "deep", "minutes": 120 },
-        { "stage": "rem", "minutes": 95 }
+        {
+          "stage": "awake",
+          "minutes": 20
+        },
+        {
+          "stage": "light",
+          "minutes": 230
+        },
+        {
+          "stage": "deep",
+          "minutes": 120
+        },
+        {
+          "stage": "rem",
+          "minutes": 95
+        }
       ],
       "heartRateAvg": 58,
       "efficiency": 88,
@@ -420,10 +567,22 @@
       "end": "2025-06-15T06:30:00Z",
       "totalMinutes": 465,
       "sleepStages": [
-        { "stage": "awake", "minutes": 30 },
-        { "stage": "light", "minutes": 260 },
-        { "stage": "deep", "minutes": 90 },
-        { "stage": "rem", "minutes": 85 }
+        {
+          "stage": "awake",
+          "minutes": 30
+        },
+        {
+          "stage": "light",
+          "minutes": 260
+        },
+        {
+          "stage": "deep",
+          "minutes": 90
+        },
+        {
+          "stage": "rem",
+          "minutes": 85
+        }
       ],
       "heartRateAvg": 60,
       "efficiency": 85,
