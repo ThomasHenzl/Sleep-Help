@@ -1,63 +1,75 @@
-# Projekt: Sleep-Help — Projektbeschreibung (vollständiger Inhaltsüberblick)
+# Projekt: Sleep-Help — vollständige Projektdokumentation
 
-## Kurzbeschreibung
-Sleep-Help ist eine responsive, statische Website, die Informationen, Tipps und visuelle Hilfen zum Thema Schlafqualität bereitstellt. Die Projektstruktur ist bewusst schlank gehalten und nutzt HTML/CSS/JS (Bootstrap-CDN) für Layout und Interaktion.
+Kurzbeschreibung  
+Sleep-Help ist ein kleines IoT‑System zur Erfassung und Visualisierung von Schlaf‑ und Vitaldaten einer Smartwatch. Die Smartwatch sendet Sensordaten (Puls, Körpertemperatur, Schrittzahl, Herzfrequenzverlauf, Sleep‑Tracker usw.) per WLAN an einen lokalen JSON‑Server. Eine Web‑Frontend zeigt die Daten live an, speichert Messverläufe und bietet Analyse‑/Visualisierungsfunktionen.
 
-## Ordnerstruktur (im Projektordner)
-- bootstrap/
-  - index.html — Startseite / Single‑Page-Layout mit Sidebar und Content-Bereich
-  - assets/
-    - favicon.ico — kleines Icon für Browser-Tab
-  - css/
-    - index.css — primäres Projektstylesheet (Theme, Layout, Sidebar, Karten, Typografie)
-    - styles.css — zusätzliche oder ergänzende Styles (Feinabstimmungen, Erweiterungen)
-  - js/
-    - scripts.js — kleine Vanilla-JS-Skripte für Sidebar-Toggle, Tab‑Logik und UI-Interaktion
+Ziele
+- Echtzeit‑Anzeige von Sensordaten (Dashboard)
+- Lokaler JSON‑Server als einfaches Backend (REST API, speichert in db.json)
+- Speicherung und Versionierung der letzten Messungen (History)
+- Dark/Light Theme, Geräte‑Tab mit Verbindung über WebSocket/HTTP/WebUSB
+- Erweiterte Messungen: Herzfrequenzverlauf und Sleep‑Tracker‑Daten
 
-## Detaillierte Beschreibung der Dateien
-- index.html
-  - Enthält das HTML-Grundgerüst der Seite (doctype, meta, title).
-  - Verlinkt Bootstrap via CDN sowie die lokalen CSS-Dateien.
-  - Bietet die Sidebar-Navigation, einen Top-Navbar‑Platzhalter und den zentralen Content-Container (.container-fluid).
-  - Bindet das lokale JS (js/scripts.js) am Seitenende.
+Architektur (komponenten)
+1. Smartwatch (Firmware)
+   - Liest Sensoren (Puls, Herzfrequenz, Temperatur, Schritte, Bewegungssensor)
+   - Sendet JSON‑Payloads per HTTP POST oder WebSocket an den JSON‑Server
+   - Beispiel‑Payload:
+     { "pulse":78, "temperature":36.5, "steps":4210, "heartRate": {...}, "sleep": {...} }
 
-- assets/favicon.ico
-  - Favicon für Browser-Tabs / Lesezeichen. Liefert visuelle Identität im Browser.
+2. JSON‑Server / Backend (lokal auf PC)
+   - Stellt REST‑API bereit (z. B. POST /api/readings, GET /api/latest, GET /api/history)
+   - Speichert Daten in bootstrap/json/db.json oder in einer kleinen DB‑Datei
+   - Optional: json-server oder Express‑Server mit Datei‑Storage
+   - Konfigurierbar per bootstrap/json/config.json (z. B. maxHistoryEntries)
 
-- css/index.css
-  - Hauptstylesheet: definiert Farben, Layout-Variablen, Sidebar-Verhalten, Lesespalte, Karten-Design, Typografie und Responsivität.
-  - Enthält Regeln für das Verschieben/Einblenden der Sidebar und das Shiften des Inhaltsbereichs.
+3. Website / Frontend
+   - Statische Seite (bootstrap/index.html + css + js)
+   - Holt Daten per fetch() (HTTP polling) oder WebSocket und zeigt sie in Gerätetab an
+   - Speichert Verlauf lokal (localStorage) und bietet Export/Import
+   - UI‑Features: Theme Toggle, Simulation, Verlaufstabelle, Visualisierungen (Bubbles, Night/Morning)
 
-- css/styles.css
-  - Ergänzende Styles (Utility-Klassen, Feinanpassungen, zusätzliche Komponenten oder thematische Erweiterungen).
-  - Dient als Platz für Experimente, alternative Farbvarianten oder zukünftige Komponenten.
+Datenmodell (Beispiele in db.json)
+- deviceReadings: Einzelmessungen (timestamp, temp, pulse, humidity, battery)
+- heartRate: Zeitreihen (timestamp, bpm, quality)
+- sleepTracker: Schlafsitzungen (start, end, stages, avgHR, score)
+- steps / calories / distance für Aktivitätsdaten
 
-- js/scripts.js
-  - Verwaltung des Sidebar-Toggles (Ein-/Ausblenden, lokale Speicherung des Zustands).
-  - Brücke zwischen Sidebar-Links und Tab-Panes: setzt aktive Klassen und zeigt die zugehörigen Inhalte.
-  - Enthält responsive Hilfslogik (z. B. Verhalten auf kleinen Bildschirmen).
+Wichtige API‑Endpunkte (Beispiel)
+- POST /api/readings  — neue Messung senden (Smartwatch → Server)
+- GET /api/latest     — letzte Messung (Frontend → Server)
+- GET /api/history    — Messverlauf (Frontend → Server)
+- POST /api/import    — optionaler Import von Messdaten (Admin)
+- GET /api/config     — Konfiguration (z. B. maxEntries)
 
-## Zielgruppe
-- Zielgruppe: Jugendliche und junge Erwachsene, Lehrkräfte und interessierte Laien.
+Laufzeit / Setup (minimal)
+- JSON‑Server (mit npm json-server) oder einfacher Express‑Server:
+  - db.json als Speicherdatei im Projektordner bootstrap/json/db.json
+  - Server lokal starten (z. B. node server/index.js) auf Port 3000
+- Smartwatch im gleichen WLAN -> sendet an http://<pc-ip>:3000/api/readings
+- Frontend öffnet bootstrap/index.html (lokal oder über einfachen Webserver)
 
-## Ziel
-- Dark/Light Mode
-- Schlafumgebungs-Check
-    - Interaktiver Raum-Check:
-        - Temperatur
-        - Licht 
-        - Lärm
-        - Matratze
-    - Konkrete Optimierungsvorschläge
-- Personalisierter Schlaf-Check
-    - Kurzer interaktiver Fragebogen (Schlafdauer, Einschlafzeit, Stresslevel, Koffein etc.)
-    - Sofortige Auswertung mit individueller Empfehlung
-- Interaktive Nachtwelt(Darkmode)
-    - Der Hintergrund ist ein Sternenhimmel und bewegt sich mit der Maus
-- Mini-Entspannungs-Spiel im Browser
-    - Gedanken-Bubbles platzen lassen
-    - Atemspiel (Kreis vergrößert/verkleinert sich)
-- Interaktive Morgenwelt (Lightmode)
-    - Sanfter Sonnenaufgang im Hintergrund
-    - Wolken bewegen sich langsam
-    - Vögel fliegen bei Mausbewegung
+Frontend‑Verhalten
+- Polling per fetch() oder WebSocket für Live‑Updates
+- UI zeigt keine Werte, wenn keine Uhr verbunden ist (Verbindungsstatus sichtbar)
+- Simulation ist nur aktiv, wenn mindestens eine Verbindung besteht (oder optional Admin‑Mode)
+- Messungen werden lokal geloggt (localStorage) und können exportiert/importiert werden
+
+Sicherheit & Hinweise
+- Lokaler Einsatz: Achte auf CORS‑Konfiguration und Firewall‑Einstellungen
+- Für produktive Nutzung Authentifizierung, HTTPS und Datenvalidierung ergänzen
+- Datenschutz: persönliche Gesundheitsdaten sensibel behandeln und lokal speichern / verschlüsseln
+
+Weiterentwicklung (nächste Schritte)
+- Vollständige Express‑Backend‑Implementierung mit REST‑Validierung und Datei‑Logging
+- WebSocket‑Server für Push‑Updates vom Gerät
+- Detaillierte Visualisierungen für Herzfrequenzverläufe und Schlafphasen
+- Mobile‑first UI‑Optimierung und Barrierefreiheit
+- Optional: Datenexport zu CSV / Anonymisierung / Nutzerverwaltung
+
+Kurzreferenz Dateistandorte (im Repo)
+- bootstrap/index.html — Frontend‑Einstieg
+- bootstrap/css/index.css, styles.css — Styles
+- bootstrap/js/scripts.js — Frontend‑Logik (Tabs, Device‑Tab, Theme)
+- bootstrap/json/db.json — Server‑Datenbank / Beispielinhalte
+- bootstrap/json/config.json — Projektkonfiguration
