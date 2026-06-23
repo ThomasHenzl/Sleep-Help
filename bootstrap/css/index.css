@@ -5,9 +5,9 @@
 
 :root {
   --sidebar-width: 320px;
-  /* Moderne, helle Farbpalette */
-  --bg-main: #f8fafc; /* Slate 50 für Hintergrund */
-  --bg-card: rgba(255, 255, 255, 0.85); /* Glassmorphism Base */
+  /* Dunkles Theme: Hintergrund bleibt heller als Text, aber deutlich dunkler */
+  --bg-main: #111827; /* Sehr dunkler Nacht-Hintergrund */
+  --bg-card: rgba(15, 23, 42, 0.92); /* Dunkles Glassmorphism-Panel */
 
   --text-primary: #dbe5ec; /* Hellerer, sanfter Blaugrau-Ton */
   --text-muted: #6c8392; /* Noch etwas heller für sekundären Text */
@@ -67,12 +67,12 @@ body {
   background-image:
     radial-gradient(
       circle at 15% 50%,
-      rgba(59, 130, 246, 0.04),
+      rgba(59, 130, 246, 0.12),
       transparent 25%
     ),
     radial-gradient(
       circle at 85% 30%,
-      rgba(99, 102, 241, 0.04),
+      rgba(99, 102, 241, 0.12),
       transparent 25%
     );
   color: var(--text-primary);
@@ -264,10 +264,10 @@ ul li::before {
 }
 
 #sidebar-items .list-group-item.active {
-  background: white;
+  background: rgba(255, 255, 255, 0.08);
   color: var(--accent);
   font-weight: 600;
-  box-shadow: var(--soft-shadow);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
 #sidebar-items .list-group-item.active::before {
@@ -287,8 +287,8 @@ ul li::before {
   align-items: center;
   justify-content: center;
   border-radius: var(--radius-md);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(8px);
   color: var(--text-primary);
   padding: 0.5rem 1rem;
